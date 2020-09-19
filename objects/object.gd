@@ -31,3 +31,9 @@ func image_to_collision_polygon(texture : Texture):
 	)
 	if points.size() > 0:
 		CollisionPolygon2DRef.set_polygon(points[0])
+
+
+func _process(delta):
+	if not Engine.editor_hint:
+		if position.y < -300:
+			queue_free()

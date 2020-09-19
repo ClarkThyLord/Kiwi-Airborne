@@ -28,7 +28,8 @@ region_rect = Rect2( 0, 0, 124, 73 )
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Rock" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( 128, 65 )
+position = Vector2( 904, 900 )
+scale = Vector2( -8.258, 8.219 )
 Version = 1
 
 [node name="Walls" type="StaticBody2D" parent="."]
