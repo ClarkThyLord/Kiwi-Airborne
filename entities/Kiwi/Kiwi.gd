@@ -21,7 +21,8 @@ func _physics_process(delta : float):
 	var direction : Vector2
 	if Input.is_action_pressed("ui_right"): direction += Vector2.RIGHT
 	if Input.is_action_pressed("ui_left"): direction += Vector2.LEFT
-	translate(direction * Speed * delta)
+#	translate(direction * Speed * delta)
+	move_and_collide(direction * Speed * delta)
 
 func _draw():
 	draw_circle(Vector2.ZERO, 32, Color.green)
