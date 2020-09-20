@@ -33,4 +33,6 @@ Open Jam is a game jam with 🖤.  At Open Jam, you build an open-source video g
 This game wouldn't be possible without all the awesome and open source tools listed below:
  - [Godot](https://github.com/godotengine/godot)
  - [Krita](https://invent.kde.org/graphics/krita)
+ - [FontLibrary](https://fontlibrary.org/en)
+  - [Cave-Story](https://fontlibrary.org/en/font/cave-story)
  
