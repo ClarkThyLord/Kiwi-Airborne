@@ -4,6 +4,12 @@ extends CanvasLayer
 
 # Refrences
 onready var Content := get_node("Content")
+onready var TabContainerRef := get_node("Content/Control/TabContainer")
+
+
+
+# Declarations
+enum TABS { Options, Help, Settings }
 
 
 
@@ -17,7 +23,8 @@ func _process(delta):
 		close() if $Content.visible else open()
 
 
-func open() -> void:
+func open(tab := TABS.Options) -> void:
+	TabContainerRef.current_tab = tab
 	Content.visible = true
 	get_tree().paused = true
 
