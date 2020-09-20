@@ -13,12 +13,11 @@
 [ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=11]
 [ext_resource path="res://assets/game/controls.png" type="Texture" id=12]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/tighL/shinL/footL:position")
 tracks/0/interp = 1
@@ -236,7 +235,7 @@ tracks/17/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 2.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
@@ -467,7 +466,7 @@ tracks/18/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "start"
 length = 0.3
 tracks/0/type = "value"
@@ -495,7 +494,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 1, 60 )
 
 [node name="World" type="Node2D"]
@@ -576,7 +575,7 @@ __meta__ = {
 [node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_right = 159.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "00000000000"
 icon = ExtResource( 7 )
 align = 0
@@ -585,7 +584,7 @@ align = 0
 margin_top = 27.0
 margin_right = 159.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "FEATHERS : 00000
 FLIGHT : 0000000
 SPEED : 000 / 120"
@@ -605,13 +604,12 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
 [node name="WalkingStage" type="Node2D" parent="."]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WalkingStage"]
 autoplay = "idle"
 playback_speed = 1.5
-anims/idle = SubResource( 1 )
-anims/jump = SubResource( 2 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 3 )
 
 [node name="hill" type="Sprite" parent="WalkingStage"]
 position = Vector2( 0, 37 )
@@ -638,7 +636,7 @@ __meta__ = {
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FlyingStage"]
-anims/start = SubResource( 5 )
+anims/start = SubResource( 4 )
 
 [node name="Objects" type="Node2D" parent="FlyingStage"]
 
@@ -654,11 +652,11 @@ region_rect = Rect2( 0, 0, 124, 73 )
 
 [node name="Left" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 20, 36.5 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Right" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 104, 36.5 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Ends" type="StaticBody2D" parent="FlyingStage" groups=[
 "ends",
@@ -667,7 +665,7 @@ shape = SubResource( 3 )
 [node name="Top" type="CollisionShape2D" parent="FlyingStage/Ends"]
 position = Vector2( 62, -16.6 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="Barriers" type="StaticBody2D" parent="FlyingStage" groups=[
@@ -677,7 +675,7 @@ disabled = true
 [node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Barriers"]
 position = Vector2( 62, 77.5 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
 position = Vector2( 62, -13 )

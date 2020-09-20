@@ -9,7 +9,6 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 
 
 # Refrences
-
 onready var WalkingStage := get_node("WalkingStage")
 onready var WalkingAnimationPlayer := get_node("WalkingStage/AnimationPlayer")
 onready var JumpingGauge := get_node("WalkingStage/Gauge")
@@ -54,9 +53,10 @@ export(float, 0.0, 250.0) var FallSpeed := 36.0
 export(float, 0.0, 300.0) var FallSpeedMax := 125
 
 export(float, 0.0, 1.0) var Luck := 0.3
+export(int, 0, 100) var MaxObstructions := 10
 
 
-var Spawns = [Vector2(15, 100), Vector2(119, 100)]
+var Spawns := [Vector2(15, 100), Vector2(119, 100)]
 
 
 
@@ -82,24 +82,36 @@ func _process(delta : float) -> void:
 		Stages.Walking:
 			pass
 		Stages.Flying:
-			if Objects.get_child_count() < 10:
-				var rock = Rock.instance()
-				Objects.add_child(rock)
-				rock.Version = randi() % 6
-				if randi() % 2 == 0:
-					rock.position = Spawns[0]
-				else:
-					rock.scale.x *= -1
-					rock.position = Spawns[1]
-			
 			if randf() < Luck:
-				var feather = Feather.instance()
-				Objects.add_child(feather)
-				feather.position = Spawns[0]
-				feather.position.x += Spawns[0].x + randi() % int(Spawns[1].x)
+				if randf() < Luck:
+					var feather = Feather.instance()
+					Objects.add_child(feather)
+					feather.position = Spawns[0]
+					feather.position.x += Spawns[0].x + randi() % int(Spawns[1].x)
+			else:
+				while get_tree().get_nodes_in_group("obstruction").size() < MaxObstructions:
+					var obstruction
+					var chance := 1 # Rocks
+					if Flight > 200: chance += 1 # Trees
+					if Flight > 450: chance += 1 # Crystals
+					if Flight > 750: chance += 1 # Fog
+					match randi() % chance:
+						1: continue
+						2: continue
+						3: continue
+						_: obstruction = Rock.instance()
+					Objects.add_child(obstruction)
+					obstruction.Version = randi() % 6
+					obstruction.scale = Vector2.ONE * (0.3 + randf())
+					if randi() % 2 == 0:
+						obstruction.position = Spawns[0]
+					else:
+						obstruction.scale.x *= -1
+						obstruction.position = Spawns[1]
+					if randf() < Luck: break
 			
 			
-			$Background/Mountains.region_rect.position.y += (FallSpeed / 1000) * delta
+			$Background/Mountains.region_rect.position.y += (FallSpeed / 750) * delta
 			$FlyingStage/Walls/Texture.region_rect.position.y += FallSpeed * delta
 			for object in Objects.get_children():
 				object.position.y -= FallSpeed * delta
