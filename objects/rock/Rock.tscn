@@ -6,6 +6,7 @@
 [node name="Rock" type="StaticBody2D"]
 scale = Vector2( 8.258, 8.219 )
 script = ExtResource( 1 )
+Type = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -4,12 +4,12 @@ extends Node
 
 
 # Declarations
-const VERSION := "0.0.0"
+const VERSION := "0.0.1"
+
 var Plays := 0
 var Feathers := 0
-var Upgrades := {
-	
-}
+
+var Boosts := {}
 
 
 
@@ -23,7 +23,8 @@ func _save() -> void:
 			
 			"plays": Plays,
 			"feathers": Feathers,
-			"upgrades": Upgrades
+			
+			"boosts": Boosts
 		}))
 		save.close()
 
@@ -37,16 +38,23 @@ func _load() -> void:
 			save_data = result.result
 		save.close()
 	
+	if save_data.empty(): return
 	if save_data.get("version", "") == VERSION:
 		Plays = save_data["plays"]
 		Feathers = save_data["feathers"]
-		Upgrades = save_data["upgrades"]
+		
+		Boosts = save_data["boosts"]
 	else: _reset()
 
 func _reset() -> void:
+	Plays = 0
 	Feathers = 0
-	Upgrades.clear()
+	Boosts.clear()
 	_save()
 
 
 func _ready() -> void: _load()
+
+
+func get_boost(boost : String) -> float:
+	return Boosts.get(boost, 0.0)
