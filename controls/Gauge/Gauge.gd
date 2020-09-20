@@ -36,7 +36,7 @@ func _process(delta):
 	update()
 	if Input.is_action_just_released("action_activate"):
 		if Oneshot: Active = false
-		emit_signal("hit", 1 if GoalRect.encloses(MarkerRect) else MarkerPosition)
+		emit_signal("hit", 2.0 if GoalRect.encloses(MarkerRect) else MarkerPosition)
 
 func _draw():
 	draw_rect(Rect2(Vector2.ZERO, get_rect().size), BackgroundColor)

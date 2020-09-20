@@ -17,6 +17,7 @@ onready var Flying := get_node("Flying")
 onready var Kiwi := get_node("Flying/Kiwi")
 onready var Objects := get_node("Flying/Objects")
 
+onready var Controls := get_node("CanvasLayer/Controls")
 onready var HUD := get_node("CanvasLayer/HUD")
 onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
 onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
@@ -33,6 +34,7 @@ func set_stage(stage : int) -> void:
 			Walking.visible = true
 			if not Walking.is_inside_tree():
 				add_child(Walking)
+			Controls.visible = get_node("/root/Session").Highscore == 0
 			JumpingGauge.Active = true
 			remove_child(Flying)
 		if Stage == Stages.Flying:
@@ -59,10 +61,17 @@ var Spawns = [Vector2(15, 100), Vector2(119, 100)]
 func _ready():
 	randomize()
 	set_stage(Stage)
+	get_node("/root/Menu").connect("retire", self, "summary")
 
 
 func get_max_speed() -> float:
 	return FallSpeedMax + get_node("/root/Session").get_boost("max_fall_speed")
+
+
+func summary() -> void:
+	if get_node("/root/Session").Highscore < Flight:
+		get_node("/root/Session").Highscore = Flight
+	get_node("/root/Session")._save()
 
 
 func _process(delta : float) -> void:
@@ -99,6 +108,7 @@ func _process(delta : float) -> void:
 			Feathers.text = str(get_node("/root/Session").Feathers)
 			Stats.text = PoolStringArray([
 				"FLIGHT : " + str(int(Flight)) + " M\n",
+				("HIGHSCORE :\n" + str(int(get_node("/root/Session").Highscore)) + " M\n") if get_node("/root/Session").Highscore > 0 else "",
 				"SPEED : " + str(int(FallSpeed)) + " \\ " + str(get_max_speed())
 			]).join("")
 
@@ -113,3 +123,11 @@ func _on_Kiwi_crashed():
 
 func _on_Gauge_hit(value):
 	WalkingAnimation.play("jump")
+
+
+func _on_Controls_gui_input(event):
+	if event is InputEventKey or event is InputEventMouseButton:
+		Controls.hide()
+
+func _on_Timer_timeout():
+	$CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a = 0 if $CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a == 1 else 1

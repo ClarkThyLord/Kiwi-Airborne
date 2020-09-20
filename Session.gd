@@ -4,9 +4,9 @@ extends Node
 
 
 # Declarations
-const VERSION := "0.0.1"
+const VERSION := "0.0.2"
 
-var Plays := 0
+var Highscore := 0
 var Feathers := 0
 
 var Boosts := {}
@@ -21,7 +21,7 @@ func _save() -> void:
 		save.store_string(JSON.print({
 			"version": VERSION,
 			
-			"plays": Plays,
+			"highscore": Highscore,
 			"feathers": Feathers,
 			
 			"boosts": Boosts
@@ -40,14 +40,14 @@ func _load() -> void:
 	
 	if save_data.empty(): return
 	if save_data.get("version", "") == VERSION:
-		Plays = save_data["plays"]
+		Highscore = save_data["highscore"]
 		Feathers = save_data["feathers"]
 		
 		Boosts = save_data["boosts"]
 	else: _reset()
 
 func _reset() -> void:
-	Plays = 0
+	Highscore = 0
 	Feathers = 0
 	Boosts.clear()
 	_save()

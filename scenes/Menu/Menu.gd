@@ -9,6 +9,9 @@ onready var TabContainerRef := get_node("Content/Control/TabContainer")
 
 
 # Declarations
+signal retire
+
+
 enum TABS { Options, Help, Settings }
 
 
@@ -38,5 +41,9 @@ func _on_Background_gui_input(event):
 		close()
 
 func _on_Retire_pressed():
-	get_node("/root/Session")._save()
+	emit_signal("retire")
 	get_tree().change_scene("res://scenes/Start/Start.tscn")
+
+
+func _on_Restart_pressed():
+	get_node("/root/Session")._reset()
