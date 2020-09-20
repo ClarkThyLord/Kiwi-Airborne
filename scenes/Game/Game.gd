@@ -10,7 +10,8 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 # Refrences
 onready var Kiwi := get_node("Kiwi")
 
-onready var Stats := get_node("CanvasLayer/HUD/Stats")
+onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
+onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
 
 
 
@@ -51,8 +52,8 @@ func _process(delta : float) -> void:
 	Flight += (FallSpeed / 15) * delta
 	FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 	
+	Feathers.text = str(get_node("/root/Session").Feathers)
 	Stats.text = PoolStringArray([
-		"FEATHERS : " + str(get_node("/root/Session").Feathers) + "\n",
 		"FLIGHT : " + str(int(Flight)) + " M\n",
 		"SPEED : " + str(int(FallSpeed)) + " \\ " + str(get_max_speed())
 	]).join("")
