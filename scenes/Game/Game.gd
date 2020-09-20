@@ -137,4 +137,4 @@ func _on_Kiwi_crashed():
 	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
 
 func _on_Kiwi_exited():
-	pass # Replace with function body.
+	FlyingAnimationPlayer.play("start")
