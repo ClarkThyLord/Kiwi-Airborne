@@ -9,6 +9,9 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 
 
 # Refrences
+onready var Walking := get_node("Walking")
+onready var Flying := get_node("Flying")
+
 onready var Kiwi := get_node("Flying/Kiwi")
 
 onready var Objects := get_node("Flying/Objects")
@@ -21,7 +24,21 @@ onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
 
 # Declarations
 enum Stages { Walking, Flying }
-export(Stages) var Stage := Stages.Walking
+export(Stages) var Stage := Stages.Walking setget set_stage
+func set_stage(stage : int) -> void:
+	Stage = stage
+	if is_inside_tree():
+		if Stage == Stages.Walking:
+			Walking.visible = true
+			if not Walking.is_inside_tree():
+				add_child(Walking)
+			remove_child(Flying)
+		if Stage == Stages.Flying:
+			Flying.visible = true
+			if not Flying.is_inside_tree():
+				add_child(Flying)
+			remove_child(Walking)
+		HUD.visible = Stage == Stages.Flying
 
 export(float, 0.0, 1000.0) var Flight := 0.0
 
@@ -39,11 +56,7 @@ var Spawns = [Vector2(15, 100), Vector2(119, 100)]
 # Core
 func _ready():
 	randomize()
-	match Stage:
-		Stages.Walking:
-			pass
-		Stages.Flying:
-			HUD.visible = false
+	set_stage(Stage)
 
 
 func get_max_speed() -> float:
@@ -55,7 +68,6 @@ func _process(delta : float) -> void:
 		Stages.Walking:
 			pass
 		Stages.Flying:
-			print(Objects.get_child_count())
 			if Objects.get_child_count() < 10:
 				var rock = Rock.instance()
 				Objects.add_child(rock)
@@ -82,7 +94,6 @@ func _process(delta : float) -> void:
 			Flight += (FallSpeed / 15) * delta
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 			
-			HUD.visible = true
 			Feathers.text = str(get_node("/root/Session").Feathers)
 			Stats.text = PoolStringArray([
 				"FLIGHT : " + str(int(Flight)) + " M\n",

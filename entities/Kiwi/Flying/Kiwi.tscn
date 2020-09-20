@@ -410,7 +410,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 40, 79 )
+extents = Vector2( 4, 10 )
 
 [node name="Kiwi" type="KinematicBody2D" groups=[
 "kiwi",
@@ -427,7 +427,6 @@ anims/null = SubResource( 4 )
 anims/right = SubResource( 5 )
 
 [node name="body" type="Sprite" parent="."]
-scale = Vector2( 8.258, 8.219 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_bone_": true
@@ -520,5 +519,5 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 38 )
+position = Vector2( 0, 4 )
 shape = SubResource( 6 )

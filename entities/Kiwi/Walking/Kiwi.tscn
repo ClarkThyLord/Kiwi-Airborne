@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/kiwi/walking/tigh.png" type="Texture" id=1]
+[ext_resource path="res://assets/kiwi/walking/shin.png" type="Texture" id=2]
+[ext_resource path="res://assets/kiwi/walking/foot.png" type="Texture" id=3]
+[ext_resource path="res://assets/kiwi/walking/body.png" type="Texture" id=4]
+[ext_resource path="res://assets/kiwi/walking/head.png" type="Texture" id=5]
+[ext_resource path="res://assets/kiwi/walking/neck.png" type="Texture" id=6]
+
+[node name="Kiwi" type="Node2D"]
+
+[node name="body" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="neck" type="Sprite" parent="body"]
+position = Vector2( 2, -1 )
+texture = ExtResource( 6 )
+offset = Vector2( 1, -1 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="head" type="Sprite" parent="body/neck"]
+position = Vector2( 1, -2 )
+texture = ExtResource( 5 )
+offset = Vector2( 3, -1 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="body/neck/head"]
+position = Vector2( 6.47169, -1.57846 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="tighL" type="Sprite" parent="body"]
+position = Vector2( -0.5, 2 )
+rotation = -0.032482
+texture = ExtResource( 1 )
+offset = Vector2( 0, 1 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="shinL" type="Sprite" parent="body/tighL"]
+position = Vector2( 1.48634, 1.66582 )
+rotation = -0.848752
+texture = ExtResource( 2 )
+offset = Vector2( -0.456613, 1.41695 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="footL" type="Sprite" parent="body/tighL/shinL"]
+position = Vector2( -0.297974, 2.46656 )
+rotation = 0.877001
+texture = ExtResource( 3 )
+offset = Vector2( 1.34169, 0.086658 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="body/tighL/shinL/footL"]
+position = Vector2( 3.82339, 1.47323 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="tighR" type="Sprite" parent="body"]
+position = Vector2( -0.5, 2 )
+rotation = 1.51222
+texture = ExtResource( 1 )
+offset = Vector2( 0, 1 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="shinR" type="Sprite" parent="body/tighR"]
+position = Vector2( 1.48634, 1.66582 )
+rotation = -0.847597
+texture = ExtResource( 2 )
+offset = Vector2( -0.456613, 1.41695 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="footR" type="Sprite" parent="body/tighR/shinR"]
+position = Vector2( -0.297974, 2.46656 )
+rotation = -0.662894
+texture = ExtResource( 3 )
+offset = Vector2( 1.34169, 0.086658 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="body/tighR/shinR/footR"]
+position = Vector2( 3.82339, 1.47323 )
+__meta__ = {
+"_edit_bone_": true
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/Kiwi/Flying/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/objects/feathers/feather.png" type="Texture" id=7]
 [ext_resource path="res://assets/game/hill.png" type="Texture" id=8]
+[ext_resource path="res://entities/Kiwi/Walking/Kiwi.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 40 )
@@ -19,7 +20,6 @@ font_data = ExtResource( 6 )
 [node name="World" type="Node2D"]
 scale = Vector2( 8.258, 8.219 )
 script = ExtResource( 2 )
-Stage = 1
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -33,14 +33,19 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
 [node name="Walking" type="Node2D" parent="."]
-visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Walking"]
 
 [node name="hill" type="Sprite" parent="Walking"]
 position = Vector2( 0, 37 )
 texture = ExtResource( 8 )
 centered = false
 
+[node name="Kiwi" parent="Walking" instance=ExtResource( 9 )]
+position = Vector2( 26.883, 31.999 )
+
 [node name="Flying" type="Node2D" parent="."]
+visible = false
 
 [node name="Objects" type="Node2D" parent="Flying"]
 
@@ -67,7 +72,7 @@ shape = SubResource( 1 )
 ]]
 
 [node name="Top" type="CollisionShape2D" parent="Flying/Ends"]
-position = Vector2( 62, -4.6 )
+position = Vector2( 62, -12.6 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -78,7 +83,7 @@ shape = SubResource( 1 )
 
 [node name="Kiwi" parent="Flying" instance=ExtResource( 1 )]
 position = Vector2( 62, 10 )
-scale = Vector2( 0.07, 0.07 )
+scale = Vector2( 0.55, 0.55 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
