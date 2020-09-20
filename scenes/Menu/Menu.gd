@@ -24,3 +24,12 @@ func open() -> void:
 func close() -> void:
 	Content.visible = false
 	get_tree().paused = false
+
+
+func _on_Background_gui_input(event):
+	if event is InputEventMouseButton:
+		close()
+
+func _on_Retire_pressed():
+	get_node("/root/Session")._save()
+	get_tree().change_scene("res://scenes/Start/Start.tscn")
