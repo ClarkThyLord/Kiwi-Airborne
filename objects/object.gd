@@ -38,5 +38,5 @@ func image_to_collision_polygon(texture : Texture):
 
 func _process(delta):
 	if not Engine.editor_hint:
-		if position.y < -300:
+		if position.y < -40:
 			queue_free()

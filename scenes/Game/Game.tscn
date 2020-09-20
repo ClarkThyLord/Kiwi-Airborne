@@ -1,28 +1,27 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://entities/Kiwi/Kiwi.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/Kiwi/Flying/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
 [ext_resource path="res://assets/game/background.png" type="Texture" id=3]
 [ext_resource path="res://assets/game/walls.png" type="Texture" id=4]
 [ext_resource path="res://assets/game/mountains.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/objects/feathers/feather.png" type="Texture" id=7]
+[ext_resource path="res://assets/game/hill.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 300, 10 )
+extents = Vector2( 1, 40 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 512, 10 )
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 6 )
 
 [node name="World" type="Node2D"]
+scale = Vector2( 8.258, 8.219 )
 script = ExtResource( 2 )
+Stage = 1
 
 [node name="Background" type="Sprite" parent="."]
-scale = Vector2( 8.25807, 8.21918 )
 texture = ExtResource( 3 )
 centered = false
 
@@ -33,48 +32,58 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
-[node name="Objects" type="Node2D" parent="."]
+[node name="Walking" type="Node2D" parent="."]
+visible = false
 
-[node name="Walls" type="StaticBody2D" parent="." groups=[
+[node name="hill" type="Sprite" parent="Walking"]
+position = Vector2( 0, 37 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Flying" type="Node2D" parent="."]
+
+[node name="Objects" type="Node2D" parent="Flying"]
+
+[node name="Walls" type="StaticBody2D" parent="Flying" groups=[
 "walls",
 ]]
 
-[node name="Texture" type="Sprite" parent="Walls"]
-scale = Vector2( 8.258, 8.219 )
+[node name="Texture" type="Sprite" parent="Flying/Walls"]
 texture = ExtResource( 4 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
-[node name="Left" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 175, 300 )
-rotation = 1.5708
+[node name="Left" type="CollisionShape2D" parent="Flying/Walls"]
+position = Vector2( 20, 36.5 )
 shape = SubResource( 1 )
 
-[node name="Right" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 849, 300 )
-rotation = 1.5708
+[node name="Right" type="CollisionShape2D" parent="Flying/Walls"]
+position = Vector2( 104, 36.5 )
 shape = SubResource( 1 )
 
-[node name="Ends" type="StaticBody2D" parent="." groups=[
+[node name="Ends" type="StaticBody2D" parent="Flying" groups=[
 "ends",
 ]]
 
-[node name="Top" type="CollisionShape2D" parent="Ends"]
-position = Vector2( 512, -50 )
-shape = SubResource( 2 )
+[node name="Top" type="CollisionShape2D" parent="Flying/Ends"]
+position = Vector2( 62, -4.6 )
+rotation = 1.5708
+shape = SubResource( 1 )
 
-[node name="Bottom" type="CollisionShape2D" parent="Ends"]
-position = Vector2( 512, 650 )
-shape = SubResource( 2 )
+[node name="Bottom" type="CollisionShape2D" parent="Flying/Ends"]
+position = Vector2( 62, 77.5 )
+rotation = 1.5708
+shape = SubResource( 1 )
 
-[node name="Kiwi" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 125 )
-scale = Vector2( 0.5, 0.5 )
+[node name="Kiwi" parent="Flying" instance=ExtResource( 1 )]
+position = Vector2( 62, 10 )
+scale = Vector2( 0.07, 0.07 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -93,7 +102,7 @@ __meta__ = {
 [node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_right = 159.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "00000000000"
 icon = ExtResource( 7 )
 align = 0
@@ -102,11 +111,11 @@ align = 0
 margin_top = 27.0
 margin_right = 159.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "FEATHERS : 00000
 FLIGHT : 0000000
 SPEED : 000 / 120"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="crashed" from="Kiwi" to="." method="_on_Kiwi_crashed"]
+[connection signal="crashed" from="Flying/Kiwi" to="." method="_on_Kiwi_crashed"]

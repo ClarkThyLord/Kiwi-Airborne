@@ -9,14 +9,20 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 
 
 # Refrences
-onready var Kiwi := get_node("Kiwi")
+onready var Kiwi := get_node("Flying/Kiwi")
 
+onready var Objects := get_node("Flying/Objects")
+
+onready var HUD := get_node("CanvasLayer/HUD")
 onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
 onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
 
 
 
 # Declarations
+enum Stages { Walking, Flying }
+export(Stages) var Stage := Stages.Walking
+
 export(float, 0.0, 1000.0) var Flight := 0.0
 
 export(float, 0.0, 100.0) var Gravity := 9.8
@@ -26,12 +32,18 @@ export(float, 0.0, 300.0) var FallSpeedMax := 125
 export(float, 0.0, 1.0) var Luck := 0.3
 
 
-var Spawns = [Vector2(120, 750), Vector2(904, 750)]
+var Spawns = [Vector2(15, 100), Vector2(119, 100)]
 
 
 
 # Core
-func _ready(): randomize()
+func _ready():
+	randomize()
+	match Stage:
+		Stages.Walking:
+			pass
+		Stages.Flying:
+			HUD.visible = false
 
 
 func get_max_speed() -> float:
@@ -39,37 +51,43 @@ func get_max_speed() -> float:
 
 
 func _process(delta : float) -> void:
-	if $Objects.get_child_count() < 10:
-		var rock = Rock.instance()
-		$Objects.add_child(rock)
-		rock.Version = randi() % 6
-		if randi() % 2 == 0:
-			rock.position = Spawns[0]
-		else:
-			rock.scale.x *= -1
-			rock.position = Spawns[1]
-	
-	if randf() < Luck:
-		var feather = Feather.instance()
-		$Objects.add_child(feather)
-		feather.position = Spawns[0]
-		feather.position.x += 100 + randi() % 400
-	
-	
-	$Background/Mountains.region_rect.position.y += (FallSpeed / 1000) * delta
-	$Walls/Texture.region_rect.position.y += FallSpeed * delta
-	for object in $Objects.get_children():
-		object.position.y -= FallSpeed * 6 * delta
-	
-	
-	Flight += (FallSpeed / 15) * delta
-	FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
-	
-	Feathers.text = str(get_node("/root/Session").Feathers)
-	Stats.text = PoolStringArray([
-		"FLIGHT : " + str(int(Flight)) + " M\n",
-		"SPEED : " + str(int(FallSpeed)) + " \\ " + str(get_max_speed())
-	]).join("")
+	match Stage:
+		Stages.Walking:
+			pass
+		Stages.Flying:
+			print(Objects.get_child_count())
+			if Objects.get_child_count() < 10:
+				var rock = Rock.instance()
+				Objects.add_child(rock)
+				rock.Version = randi() % 6
+				if randi() % 2 == 0:
+					rock.position = Spawns[0]
+				else:
+					rock.scale.x *= -1
+					rock.position = Spawns[1]
+			
+			if randf() < Luck:
+				var feather = Feather.instance()
+				Objects.add_child(feather)
+				feather.position = Spawns[0]
+				feather.position.x += Spawns[0].x + randi() % int(Spawns[1].x)
+			
+			
+			$Background/Mountains.region_rect.position.y += (FallSpeed / 1000) * delta
+			$Flying/Walls/Texture.region_rect.position.y += FallSpeed * delta
+			for object in Objects.get_children():
+				object.position.y -= FallSpeed * delta
+			
+			
+			Flight += (FallSpeed / 15) * delta
+			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
+			
+			HUD.visible = true
+			Feathers.text = str(get_node("/root/Session").Feathers)
+			Stats.text = PoolStringArray([
+				"FLIGHT : " + str(int(Flight)) + " M\n",
+				"SPEED : " + str(int(FallSpeed)) + " \\ " + str(get_max_speed())
+			]).join("")
 
 
 func _on_Kiwi_crashed():
