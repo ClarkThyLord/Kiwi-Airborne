@@ -12,7 +12,7 @@
 
 [sub_resource type="Animation" id=3]
 resource_name = "jump"
-length = 4.0
+length = 3.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
 tracks/0/interp = 1
@@ -228,6 +228,18 @@ tracks/17/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 25.0, 90.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("..:Stage")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 3.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ 1 ]
 }
 
 [sub_resource type="RectangleShape2D" id=1]
