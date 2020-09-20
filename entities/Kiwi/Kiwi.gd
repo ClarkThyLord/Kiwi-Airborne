@@ -8,6 +8,7 @@ extends KinematicBody2D
 
 # Declarations
 signal crashed
+signal stopped
 
 export(float) var Speed := 300.0 # For horizontal movement
 

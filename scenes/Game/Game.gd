@@ -50,3 +50,7 @@ func _process(delta : float) -> void:
 		"FLIGHT : " + str(int(Flight)) + " M\n",
 		"SPEED : " + str(int(Speed)) + " \\ " + str(125 + get_node("/root/Session").Upgrades.get("max_speed", 0))
 	]).join("")
+
+
+func _on_Kiwi_crashed():
+	Speed = clamp(Speed - Speed * 0.03, 0.0, 125 + get_node("/root/Session").Upgrades.get("max_speed", 0))

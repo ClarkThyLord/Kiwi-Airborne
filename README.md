@@ -2,7 +2,7 @@
 	<a>
 		<img width="128px" src="./icon.png" alt="" />
 		<h1 align="center">
-			Kiwi-Airborne
+			Kiwi: Airborne
 		</h1>
 	</a>
 </p>
@@ -33,6 +33,7 @@ Open Jam is a game jam with 🖤.  At Open Jam, you build an open-source video g
 This game wouldn't be possible without all the awesome and open source tools listed below:
  - [Godot](https://github.com/godotengine/godot)
  - [Krita](https://invent.kde.org/graphics/krita)
+ - [Notepad++](https://github.com/notepad-plus-plus/notepad-plus-plus)
  - [FontLibrary](https://fontlibrary.org/en)
    - [Cave-Story](https://fontlibrary.org/en/font/cave-story)
  
