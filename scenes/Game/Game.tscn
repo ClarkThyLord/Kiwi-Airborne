@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/Kiwi/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
 [ext_resource path="res://assets/game/background.png" type="Texture" id=3]
 [ext_resource path="res://assets/game/walls.png" type="Texture" id=4]
 [ext_resource path="res://assets/game/mountains.png" type="Texture" id=5]
-[ext_resource path="res://objects/rock/Rock.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 300, 10 )
@@ -26,11 +25,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
 [node name="Objects" type="Node2D" parent="."]
-
-[node name="Rock" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( 904, 900 )
-scale = Vector2( -8.258, 8.219 )
-Version = 1
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -54,3 +48,26 @@ shape = SubResource( 1 )
 [node name="Kiwi" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 125 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Label" parent="CanvasLayer/HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -139.0
+margin_top = 25.0
+margin_right = -25.0
+margin_bottom = 48.0
+text = "FEATHERS : 00000
+FLIGHT : 0000000
+SPEED : 000 / 120"
+__meta__ = {
+"_edit_use_anchors_": false
+}
