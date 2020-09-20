@@ -9,13 +9,15 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 
 
 # Refrences
-onready var Walking := get_node("Walking")
-onready var JumpingGauge := get_node("Walking/Gauge")
-onready var WalkingAnimation := get_node("Walking/AnimationPlayer")
 
-onready var Flying := get_node("Flying")
-onready var Kiwi := get_node("Flying/Kiwi")
-onready var Objects := get_node("Flying/Objects")
+onready var WalkingStage := get_node("WalkingStage")
+onready var WalkingAnimationPlayer := get_node("WalkingStage/AnimationPlayer")
+onready var JumpingGauge := get_node("WalkingStage/Gauge")
+
+onready var FlyingStage := get_node("FlyingStage")
+onready var FlyingAnimationPlayer := get_node("FlyingStage/AnimationPlayer")
+onready var Kiwi := get_node("FlyingStage/Kiwi")
+onready var Objects := get_node("FlyingStage/Objects")
 
 onready var Controls := get_node("CanvasLayer/Controls")
 onready var HUD := get_node("CanvasLayer/HUD")
@@ -31,17 +33,18 @@ func set_stage(stage : int) -> void:
 	Stage = stage
 	if is_inside_tree():
 		if Stage == Stages.Walking:
-			Walking.visible = true
-			if not Walking.is_inside_tree():
-				add_child(Walking)
+			WalkingStage.visible = true
+			if not WalkingStage.is_inside_tree():
+				add_child(WalkingStage)
 			Controls.visible = get_node("/root/Session").Highscore == 0
 			JumpingGauge.Active = true
-			remove_child(Flying)
+			remove_child(FlyingStage)
 		if Stage == Stages.Flying:
-			Flying.visible = true
-			if not Flying.is_inside_tree():
-				add_child(Flying)
-			remove_child(Walking)
+			FlyingStage.visible = true
+			if not FlyingStage.is_inside_tree():
+				add_child(FlyingStage)
+			FlyingAnimationPlayer.play("start")
+			remove_child(WalkingStage)
 		HUD.visible = Stage == Stages.Flying
 
 export(float, 0.0, 1000.0) var Flight := 0.0
@@ -77,7 +80,7 @@ func summary() -> void:
 func _process(delta : float) -> void:
 	match Stage:
 		Stages.Walking:
-			update()
+			pass
 		Stages.Flying:
 			if Objects.get_child_count() < 10:
 				var rock = Rock.instance()
@@ -97,7 +100,7 @@ func _process(delta : float) -> void:
 			
 			
 			$Background/Mountains.region_rect.position.y += (FallSpeed / 1000) * delta
-			$Flying/Walls/Texture.region_rect.position.y += FallSpeed * delta
+			$FlyingStage/Walls/Texture.region_rect.position.y += FallSpeed * delta
 			for object in Objects.get_children():
 				object.position.y -= FallSpeed * delta
 			
@@ -113,16 +116,12 @@ func _process(delta : float) -> void:
 			]).join("")
 
 
-func _draw():
-	draw_rect(Rect2(Vector2(), Vector2(800, 600)), Color.blue)
-
-
 func _on_Kiwi_crashed():
 	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
 
 
 func _on_Gauge_hit(value):
-	WalkingAnimation.play("jump")
+	WalkingAnimationPlayer.play("jump")
 
 
 func _on_Controls_gui_input(event):

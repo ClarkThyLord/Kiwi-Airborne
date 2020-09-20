@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/Kiwi/Flying/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
@@ -233,7 +233,7 @@ tracks/17/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-length = 3.5
+length = 2.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
 tracks/0/interp = 1
@@ -457,10 +457,38 @@ tracks/18/loop_wrap = true
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/keys = {
-"times": PoolRealArray( 3.5 ),
+"times": PoolRealArray( 2.9 ),
 "transitions": PoolRealArray( 1 ),
 "update": 2,
 "values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "start"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Kiwi:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 62, -13 ), Vector2( 62, 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Ends/Top:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 2,
+"values": [ true, false ]
 }
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -485,29 +513,24 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
-[node name="Walking" type="Node2D" parent="."]
+[node name="WalkingStage" type="Node2D" parent="."]
+visible = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Walking"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WalkingStage"]
 autoplay = "idle"
 playback_speed = 1.5
 anims/idle = SubResource( 1 )
 anims/jump = SubResource( 2 )
 
-[node name="hill" type="Sprite" parent="Walking"]
+[node name="hill" type="Sprite" parent="WalkingStage"]
 position = Vector2( 0, 37 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Kiwi" parent="Walking" instance=ExtResource( 9 )]
+[node name="Kiwi" parent="WalkingStage" instance=ExtResource( 9 )]
 position = Vector2( 26.883, 31.999 )
 
-[node name="body" parent="Walking/Kiwi" index="0"]
-position = Vector2( 0.242188, -0.365007 )
-
-[node name="footR" parent="Walking/Kiwi/body/tighR/shinR" index="0"]
-scale = Vector2( 1, 1.25686 )
-
-[node name="Gauge" type="Control" parent="Walking"]
+[node name="Gauge" type="Control" parent="WalkingStage"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 24.5
@@ -520,45 +543,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Flying" type="Node2D" parent="."]
-visible = false
+[node name="FlyingStage" type="Node2D" parent="."]
 
-[node name="Objects" type="Node2D" parent="Flying"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FlyingStage"]
+anims/start = SubResource( 5 )
 
-[node name="Walls" type="StaticBody2D" parent="Flying" groups=[
+[node name="Objects" type="Node2D" parent="FlyingStage"]
+
+[node name="Walls" type="StaticBody2D" parent="FlyingStage" groups=[
 "walls",
 ]]
 
-[node name="Texture" type="Sprite" parent="Flying/Walls"]
+[node name="Texture" type="Sprite" parent="FlyingStage/Walls"]
 texture = ExtResource( 4 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 124, 73 )
 
-[node name="Left" type="CollisionShape2D" parent="Flying/Walls"]
+[node name="Left" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 20, 36.5 )
 shape = SubResource( 3 )
 
-[node name="Right" type="CollisionShape2D" parent="Flying/Walls"]
+[node name="Right" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 104, 36.5 )
 shape = SubResource( 3 )
 
-[node name="Ends" type="StaticBody2D" parent="Flying" groups=[
+[node name="Ends" type="StaticBody2D" parent="FlyingStage" groups=[
 "ends",
 ]]
 
-[node name="Top" type="CollisionShape2D" parent="Flying/Ends"]
+[node name="Top" type="CollisionShape2D" parent="FlyingStage/Ends"]
 position = Vector2( 62, -12.6 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
-[node name="Bottom" type="CollisionShape2D" parent="Flying/Ends"]
+[node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Ends"]
 position = Vector2( 62, 77.5 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
-[node name="Kiwi" parent="Flying" instance=ExtResource( 1 )]
-position = Vector2( 62, 10 )
+[node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
+position = Vector2( 62, -13 )
 scale = Vector2( 0.55, 0.55 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -644,9 +669,7 @@ SPEED : 000 / 120"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="hit" from="Walking/Gauge" to="." method="_on_Gauge_hit"]
-[connection signal="crashed" from="Flying/Kiwi" to="." method="_on_Kiwi_crashed"]
+[connection signal="hit" from="WalkingStage/Gauge" to="." method="_on_Gauge_hit"]
+[connection signal="crashed" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_crashed"]
 [connection signal="gui_input" from="CanvasLayer/Controls" to="." method="_on_Controls_gui_input"]
 [connection signal="timeout" from="CanvasLayer/Controls/VBoxContainer/Prompt/Timer" to="." method="_on_Timer_timeout"]
-
-[editable path="Walking/Kiwi"]
