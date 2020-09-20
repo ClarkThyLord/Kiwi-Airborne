@@ -16,12 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Kiwi: Airborne"
-run/main_scene="res://scenes/Game/Game.tscn"
+run/main_scene="res://scenes/Start/Start.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Session="*res://Session.gd"
+Menu="*res://scenes/Menu/Menu.tscn"
 
 [display]
 
