@@ -10,10 +10,11 @@ const Rock := preload("res://objects/rock/Rock.tscn")
 
 # Refrences
 onready var Walking := get_node("Walking")
+onready var JumpingGauge := get_node("Walking/Gauge")
+onready var WalkingAnimation := get_node("Walking/AnimationPlayer")
+
 onready var Flying := get_node("Flying")
-
 onready var Kiwi := get_node("Flying/Kiwi")
-
 onready var Objects := get_node("Flying/Objects")
 
 onready var HUD := get_node("CanvasLayer/HUD")
@@ -32,6 +33,7 @@ func set_stage(stage : int) -> void:
 			Walking.visible = true
 			if not Walking.is_inside_tree():
 				add_child(Walking)
+			JumpingGauge.Active = true
 			remove_child(Flying)
 		if Stage == Stages.Flying:
 			Flying.visible = true
@@ -66,7 +68,7 @@ func get_max_speed() -> float:
 func _process(delta : float) -> void:
 	match Stage:
 		Stages.Walking:
-			pass
+			update()
 		Stages.Flying:
 			if Objects.get_child_count() < 10:
 				var rock = Rock.instance()
@@ -101,5 +103,13 @@ func _process(delta : float) -> void:
 			]).join("")
 
 
+func _draw():
+	draw_rect(Rect2(Vector2(), Vector2(800, 600)), Color.blue)
+
+
 func _on_Kiwi_crashed():
 	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
+
+
+func _on_Gauge_hit(value):
+	WalkingAnimation.play("jump")
