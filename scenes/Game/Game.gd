@@ -43,10 +43,10 @@ func _process(delta : float) -> void:
 		object.position.y -= Speed * 6 * delta
 	
 	Flight += (Speed / 15) * delta
-	Speed = clamp(Speed + Gravity * delta, 0.0, 120)
+	Speed = clamp(Speed + Gravity * delta, 0.0, 125 + get_node("/root/Session").Upgrades.get("max_speed", 0))
 	
 	Stats.text = PoolStringArray([
-		"FEATHERS : " + str(0) + "\n",
+		"FEATHERS : " + str(get_node("/root/Session").Feathers) + "\n",
 		"FLIGHT : " + str(int(Flight)) + " M\n",
-		"SPEED : " + str(int(Speed)) + " \\ " + str(120)
+		"SPEED : " + str(int(Speed)) + " \\ " + str(125 + get_node("/root/Session").Upgrades.get("max_speed", 0))
 	]).join("")

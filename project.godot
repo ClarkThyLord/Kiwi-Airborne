@@ -19,6 +19,10 @@ config/name="Kiwi: Airborne"
 run/main_scene="res://scenes/Game/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Session="*res://Session.gd"
+
 [display]
 
 window/stretch/mode="2d"
