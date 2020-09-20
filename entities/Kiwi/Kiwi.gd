@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 
 # Refrences
+onready var AnimationPlayerRef := get_node("AnimationPlayer")
 
 
 
@@ -28,6 +29,10 @@ func _physics_process(delta : float):
 	if Input.is_action_pressed("ui_left"): direction += Vector2.LEFT
 	if Input.is_action_pressed("ui_up") and position.y > 100:
 		direction += Vector2.UP
+	if direction.x < 0:
+		AnimationPlayerRef.play("left")
+	elif direction.x > 0:
+		AnimationPlayerRef.play("right")
 	var hit := move_and_collide(direction.normalized() * Speed * delta)
 	
 	if is_instance_valid(hit):
