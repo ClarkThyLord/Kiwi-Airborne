@@ -9,7 +9,7 @@ onready var AnimationPlayerRef := get_node("AnimationPlayer")
 
 # Declarations
 signal crashed
-signal stopped
+signal exited
 
 export(float) var Speed := 300.0
 

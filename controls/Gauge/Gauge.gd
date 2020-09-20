@@ -34,7 +34,7 @@ func _ready():
 
 func _process(delta):
 	update()
-	if Input.is_action_just_released("action_activate"):
+	if Active and Input.is_action_just_released("action_activate"):
 		if Oneshot: Active = false
 		emit_signal("hit", 2.0 if GoalRect.encloses(MarkerRect) else MarkerPosition)
 

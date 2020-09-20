@@ -37,7 +37,7 @@ func set_stage(stage : int) -> void:
 			if not WalkingStage.is_inside_tree():
 				add_child(WalkingStage)
 			Controls.visible = get_node("/root/Session").Highscore == 0
-			JumpingGauge.Active = true
+			JumpingGauge.Active = not Controls.visible
 			remove_child(FlyingStage)
 		if Stage == Stages.Flying:
 			FlyingStage.visible = true
@@ -116,17 +116,25 @@ func _process(delta : float) -> void:
 			]).join("")
 
 
-func _on_Kiwi_crashed():
-	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
+# Controls prompt
+func _on_Controls_gui_input(event):
+	if Controls.visible and event is InputEventMouseButton:
+		Controls.hide()
+		JumpingGauge.Active = true
+		Controls.accept_event()
+
+func _on_Timer_timeout():
+	$CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a = 0 if $CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a == 1 else 1
 
 
+# Jump stage
 func _on_Gauge_hit(value):
 	WalkingAnimationPlayer.play("jump")
 
 
-func _on_Controls_gui_input(event):
-	if event is InputEventKey or event is InputEventMouseButton:
-		Controls.hide()
+# Flying stage
+func _on_Kiwi_crashed():
+	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
 
-func _on_Timer_timeout():
-	$CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a = 0 if $CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a == 1 else 1
+func _on_Kiwi_exited():
+	pass # Replace with function body.

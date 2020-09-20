@@ -13,6 +13,10 @@
 [ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=11]
 [ext_resource path="res://assets/game/controls.png" type="Texture" id=12]
 
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 6 )
+
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 tracks/0/type = "value"
@@ -487,20 +491,106 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 2,
+"update": 0,
 "values": [ true, false ]
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1, 40 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 24
-font_data = ExtResource( 6 )
+extents = Vector2( 1, 60 )
 
 [node name="World" type="Node2D"]
 scale = Vector2( 8.258, 8.219 )
 script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Controls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 50.0
+margin_right = -100.0
+margin_bottom = -50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Controls/VBoxContainer"]
+margin_right = 824.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Prompt" type="TextureRect" parent="CanvasLayer/Controls/VBoxContainer"]
+margin_top = 404.0
+margin_right = 824.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 96 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Controls/VBoxContainer/Prompt"]
+wait_time = 0.5
+autostart = true
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -158.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
+margin_right = 159.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 4 )
+text = "00000000000"
+icon = ExtResource( 7 )
+align = 0
+
+[node name="Stats" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
+margin_top = 27.0
+margin_right = 159.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 4 )
+text = "FEATHERS : 00000
+FLIGHT : 0000000
+SPEED : 000 / 120"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -573,11 +663,16 @@ shape = SubResource( 3 )
 ]]
 
 [node name="Top" type="CollisionShape2D" parent="FlyingStage/Ends"]
-position = Vector2( 62, -12.6 )
+position = Vector2( 62, -16.6 )
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
 
-[node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Ends"]
+[node name="Barriers" type="StaticBody2D" parent="FlyingStage" groups=[
+"barriers",
+]]
+
+[node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Barriers"]
 position = Vector2( 62, 77.5 )
 rotation = 1.5708
 shape = SubResource( 3 )
@@ -585,91 +680,8 @@ shape = SubResource( 3 )
 [node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
 position = Vector2( 62, -13 )
 scale = Vector2( 0.55, 0.55 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Controls" type="Control" parent="CanvasLayer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Controls"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Controls/VBoxContainer"]
-margin_top = 64.0
-margin_right = 1024.0
-margin_bottom = 500.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 12 )
-expand = true
-stretch_mode = 6
-
-[node name="Prompt" type="TextureRect" parent="CanvasLayer/Controls/VBoxContainer"]
-margin_top = 504.0
-margin_right = 1024.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 0, 96 )
-texture = ExtResource( 11 )
-stretch_mode = 6
-
-[node name="Timer" type="Timer" parent="CanvasLayer/Controls/VBoxContainer/Prompt"]
-wait_time = 0.5
-autostart = true
-
-[node name="HUD" type="Control" parent="CanvasLayer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -158.0
-margin_bottom = 78.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
-margin_right = 159.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 4 )
-text = "00000000000"
-icon = ExtResource( 7 )
-align = 0
-
-[node name="Stats" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
-margin_top = 27.0
-margin_right = 159.0
-margin_bottom = 78.0
-custom_fonts/font = SubResource( 4 )
-text = "FEATHERS : 00000
-FLIGHT : 0000000
-SPEED : 000 / 120"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="hit" from="WalkingStage/Gauge" to="." method="_on_Gauge_hit"]
-[connection signal="crashed" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_crashed"]
 [connection signal="gui_input" from="CanvasLayer/Controls" to="." method="_on_Controls_gui_input"]
 [connection signal="timeout" from="CanvasLayer/Controls/VBoxContainer/Prompt/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="hit" from="WalkingStage/Gauge" to="." method="_on_Gauge_hit"]
+[connection signal="crashed" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_crashed"]
+[connection signal="exited" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_exited"]
