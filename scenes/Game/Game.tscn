@@ -11,10 +11,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 300, 10 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 512, 10 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 6 )
 
@@ -62,11 +62,11 @@ shape = SubResource( 1 )
 
 [node name="Top" type="CollisionShape2D" parent="Ends"]
 position = Vector2( 512, -50 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Bottom" type="CollisionShape2D" parent="Ends"]
 position = Vector2( 512, 650 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Kiwi" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 125 )
@@ -93,7 +93,7 @@ __meta__ = {
 [node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_right = 159.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "00000000000"
 icon = ExtResource( 7 )
 align = 0
@@ -102,7 +102,7 @@ align = 0
 margin_top = 27.0
 margin_right = 159.0
 margin_bottom = 78.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "FEATHERS : 00000
 FLIGHT : 0000000
 SPEED : 000 / 120"
