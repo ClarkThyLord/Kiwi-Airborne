@@ -33,5 +33,7 @@ func _physics_process(delta : float):
 	if is_instance_valid(hit):
 		if hit.collider.is_in_group("ends"):
 			emit_signal("stopped")
+		elif hit.collider.is_in_group("pickable"):
+			hit.collider.pick()
 		else:
 			emit_signal("crashed")

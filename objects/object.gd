@@ -18,6 +18,9 @@ func _ready():
 	add_to_group(Types.keys()[Type].to_lower())
 
 
+func pick() -> void: queue_free()
+
+
 func image_to_collision_polygon(texture : Texture):
 	var bm = BitMap.new()
 	bm.create_from_image_alpha(texture.get_data())

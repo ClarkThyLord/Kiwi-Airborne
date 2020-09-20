@@ -5,6 +5,8 @@
 
 [node name="Feather" type="StaticBody2D"]
 scale = Vector2( 8.258, 8.219 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
