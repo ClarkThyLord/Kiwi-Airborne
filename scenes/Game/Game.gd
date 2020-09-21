@@ -36,6 +36,8 @@ onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
 onready var SummaryRef := get_node("CanvasLayer/Summary")
 onready var SummaryStats := get_node("CanvasLayer/Summary/TextureRect/VBoxContainer/Stats")
 
+onready var Story := get_node("CanvasLayer/Story")
+
 
 
 # Declarations
@@ -48,7 +50,11 @@ func set_stage(stage : int) -> void:
 			WalkingStage.visible = true
 			if not WalkingStage.is_inside_tree():
 				add_child(WalkingStage)
+			
+			if get_node("/root/Session").Highscore == 0:
+				Story.show_story(1)
 			Controls.visible = get_node("/root/Session").Highscore == 0
+			
 			JumpingGauge.Active = not Controls.visible
 			remove_child(FlyingStage)
 		if Stage == Stages.Flying:
@@ -87,6 +93,7 @@ func _ready():
 	Controls.hide()
 	HUD.hide()
 	SummaryRef.hide()
+	Story.hide()
 	
 	set_stage(Stage)
 	
@@ -161,6 +168,20 @@ func _process(delta : float) -> void:
 			
 			Flight += (FallSpeed / 15) * delta
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
+			
+			
+			if int(Flight) == 200 and get_node("/root/Session").Highscore < Flight:
+				Flight += 1
+				Story.show_story(2)
+				get_node("/root/Session").Highscore = 200
+			elif int(Flight) == 450 and get_node("/root/Session").Highscore < Flight:
+				Flight += 1
+				Story.show_story(3)
+				get_node("/root/Session").Highscore = 450
+			elif int(Flight) == 1000 and get_node("/root/Session").Highscore < Flight:
+				Flight += 1
+				Story.show_story(4)
+				get_node("/root/Session").Highscore = 1000
 			
 			Health.value = Kiwi.Health
 			Stamina.value = Kiwi.Stamina

@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Menu/Upgrades/Upgrades.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Menu/Story/Story.tscn" type="PackedScene" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -77,12 +80,19 @@ margin_right = 472.0
 margin_bottom = 285.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/tab_fg = SubResource( 4 )
 custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Story" parent="Content/Control/TextureRect/VBoxContainer/TabContainer" instance=ExtResource( 6 )]
+margin_left = 16.0
+margin_top = 23.0
+margin_right = -16.0
+
 [node name="Upgrades" parent="Content/Control/TextureRect/VBoxContainer/TabContainer" instance=ExtResource( 5 )]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -126,7 +136,7 @@ margin_top = 2.0
 margin_right = 218.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "AUDIO"
 
 [node name="Audio" type="CheckBox" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
@@ -141,7 +151,7 @@ margin_top = 28.0
 margin_right = 218.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "MASTER"
 
 [node name="Master" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
@@ -156,7 +166,7 @@ margin_top = 52.0
 margin_right = 218.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "MUSIC"
 
 [node name="Music" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
@@ -171,7 +181,7 @@ margin_top = 76.0
 margin_right = 218.0
 margin_bottom = 96.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "SOUND EFFECTS"
 
 [node name="Sound Effects" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]

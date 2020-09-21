@@ -20,7 +20,7 @@ onready var Retire := get_node("Content/Control/TextureRect/VBoxContainer/HBoxCo
 # Declarations
 signal retire
 
-enum TABS { Upgrades, Help, Settings }
+enum TABS { Story, Upgrades, Help, Settings }
 
 export(int) var MinVolume := -40
 export(int) var MaxVolume := 45
@@ -38,7 +38,7 @@ func _process(delta):
 
 
 var paused_before : bool
-func open(tab := TABS.Upgrades) -> void:
+func open(tab := TABS.Story) -> void:
 	TabContainerRef.current_tab = tab
 	Content.visible = true
 	paused_before = get_tree().paused

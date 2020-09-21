@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Game/Story/Story.gd" type="Script" id=1]
+[ext_resource path="res://assets/story/1.png" type="Texture" id=2]
+[ext_resource path="res://assets/story/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/story/4.png" type="Texture" id=4]
+[ext_resource path="res://assets/story/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=6]
+
+[node name="Story" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Parts" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="TextureRect" parent="Parts"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource( 2 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="TextureRect" parent="Parts"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="3" type="TextureRect" parent="Parts"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource( 5 )
+stretch_mode = 6
+
+[node name="4" type="TextureRect" parent="Parts"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource( 4 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="controlsprompt" type="TextureRect" parent="."]
+modulate = Color( 0.843137, 0.72549, 0.45098, 1 )
+anchor_left = 0.0585938
+anchor_top = 0.791667
+anchor_right = 0.938477
+anchor_bottom = 0.95
+margin_top = -3.05176e-05
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+[connection signal="gui_input" from="." to="." method="_on_Story_gui_input"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
