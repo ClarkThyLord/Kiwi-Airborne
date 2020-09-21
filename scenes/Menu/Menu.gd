@@ -4,7 +4,11 @@ extends CanvasLayer
 
 # Refrences
 onready var Content := get_node("Content")
+
 onready var TabContainerRef := get_node("Content/Control/TextureRect/VBoxContainer/TabContainer")
+onready var Upgrades := get_node("Content/Control/TextureRect/VBoxContainer/TabContainer/Upgrades")
+
+onready var Retire := get_node("Content/Control/TextureRect/VBoxContainer/HBoxContainer/Retire")
 
 
 
@@ -12,7 +16,7 @@ onready var TabContainerRef := get_node("Content/Control/TextureRect/VBoxContain
 signal retire
 
 
-enum TABS { Options, Upgrades, Help, Settings }
+enum TABS { Upgrades, Help, Settings }
 
 
 
@@ -26,7 +30,7 @@ func _process(delta):
 		close() if $Content.visible else open()
 
 
-func open(tab := TABS.Options) -> void:
+func open(tab := TABS.Upgrades) -> void:
 	TabContainerRef.current_tab = tab
 	Content.visible = true
 	get_tree().paused = true
@@ -47,3 +51,7 @@ func _on_Retire_pressed():
 
 func _on_Restart_pressed():
 	get_node("/root/Session")._reset()
+
+
+func _on_Content_visibility_changed():
+	Retire.visible = not get_tree().get_current_scene().get_name() == "Start"

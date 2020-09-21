@@ -145,6 +145,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RETIRE"
+[connection signal="visibility_changed" from="Content" to="." method="_on_Content_visibility_changed"]
 [connection signal="gui_input" from="Content/Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/HBoxContainer/Resume" to="." method="close"]

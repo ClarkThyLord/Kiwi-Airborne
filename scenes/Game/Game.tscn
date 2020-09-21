@@ -11,7 +11,7 @@
 [ext_resource path="res://entities/Kiwi/Walking/Kiwi.tscn" type="PackedScene" id=9]
 [ext_resource path="res://controls/Gauge/Gauge.gd" type="Script" id=10]
 [ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=11]
-[ext_resource path="res://assets/game/controls.png" type="Texture" id=12]
+[ext_resource path="res://assets/menu/controls.png" type="Texture" id=12]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
@@ -526,7 +526,6 @@ wait_time = 0.5
 autostart = true
 
 [node name="Controls" type="Control" parent="CanvasLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -574,6 +573,7 @@ __meta__ = {
 }
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -614,6 +614,7 @@ __meta__ = {
 }
 
 [node name="Summary" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
