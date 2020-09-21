@@ -11,7 +11,20 @@ onready var AnimationPlayerRef := get_node("AnimationPlayer")
 signal crashed
 signal exited
 
-export(float) var Speed := 300.0
+export(float, 0.0, 100.0) var Stamina := 100.0 setget set_stamina
+func set_stamina(stamina : float) -> void:
+	Stamina = clamp(stamina, 0.0, 100.0)
+export(float, 0.0, 100.0) var StaminaRegen
+
+export(float, 0.0, 1000.0) var Speed := 300.0
+
+export(float, 0.0, 10.0) var Boost := 0.75
+export(float, 0.0, 10.0) var BoostCost := 3.0
+
+var PowerTimer := 0.0
+export(bool) var PowerActive := false
+enum Powers { Dash, Invincible }
+export(Powers) var Power := Powers.Dash
 
 
 
@@ -21,6 +34,8 @@ func _ready():
 
 
 func _physics_process(delta : float):
+	set_stamina(Stamina + StaminaRegen)
+	
 	var direction : Vector2
 	if Input.is_action_pressed("ui_right"): direction += Vector2.RIGHT
 	if Input.is_action_pressed("ui_down"):
@@ -28,11 +43,21 @@ func _physics_process(delta : float):
 	if Input.is_action_pressed("ui_left"): direction += Vector2.LEFT
 	if Input.is_action_pressed("ui_up"):
 		direction += Vector2.UP
+	var velocity := direction.normalized() * Speed
+	if Input.is_action_pressed("action_boost") and Stamina >= BoostCost:
+		Stamina -= BoostCost
+		velocity += velocity * Boost
+	
+	if Input.is_action_pressed("action_activate"):
+		# TODO Activate power
+		pass
+	
 	if direction.x < 0:
 		AnimationPlayerRef.play("left")
 	elif direction.x > 0:
 		AnimationPlayerRef.play("right")
-	var hit := move_and_collide(direction.normalized() * Speed * delta)
+	
+	var hit := move_and_collide(velocity * delta)
 	
 	if is_instance_valid(hit):
 		if hit.collider.is_in_group("pickable"):
