@@ -6,6 +6,7 @@
 [node name="Crystal" type="StaticBody2D"]
 script = ExtResource( 1 )
 Type = 1
+Damage = null
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

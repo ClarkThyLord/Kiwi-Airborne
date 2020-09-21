@@ -10,18 +10,26 @@ onready var TweenRef := get_node("Tween")
 
 
 # Declarations
+signal hit
 signal crashed
 signal exited
+
+export(float, 0.0, 100.0) var Health := 100.0 setget set_health
+func set_health(health : float) -> void:
+	Health = clamp(health, 0.0, 100.0)
+	if Health <= 0.0:
+		emit_signal("crashed")
+export(float, 0.0, 100.0) var HealthRegen := 0.0
 
 export(float, 0.0, 100.0) var Stamina := 100.0 setget set_stamina
 func set_stamina(stamina : float) -> void:
 	Stamina = clamp(stamina, 0.0, 100.0)
-export(float, 0.0, 100.0) var StaminaRegen := 1
+export(float, 0.0, 100.0) var StaminaRegen := 1.0
 
 export(float, 0.0, 1000.0) var Speed := 300.0
 
 export(float, 0.0, 10.0) var Boost := 0.75
-export(float, 0.0, 10.0) var BoostCost := 3
+export(float, 0.0, 10.0) var BoostCost := 3.0
 
 export(bool) var PowerActive := false
 enum Powers { Dash, Invincible, Attract }
@@ -83,12 +91,14 @@ func _physics_process(delta : float):
 	var hit := move_and_collide(velocity * delta)
 	
 	if is_instance_valid(hit):
-		if hit.collider.is_in_group("pickable"):
-			hit.collider.pick()
-		elif hit.collider.is_in_group("ends"):
-			emit_signal("exited")
+		if hit.collider.is_in_group("pickable"): hit.collider.pick()
+		elif hit.collider.is_in_group("ends"): emit_signal("exited")
 		else:
-			emit_signal("crashed")
+			var damage := 1
+			if hit.collider.is_in_group("obstruction"):
+				damage = hit.collider.Damage
+			set_health(Health - damage)
+			emit_signal("hit")
 
 
 func _on_Tween_tween_completed(object, key):

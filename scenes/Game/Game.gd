@@ -3,8 +3,6 @@ extends Node2D
 
 
 # Imports
-const Life := preload("res://controls/Life.tscn")
-
 const Rock := preload("res://objects/rock/Rock.tscn")
 const TreeClass := preload("res://objects/Tree/Tree.tscn")
 const Crystal := preload("res://objects/crystal/Crystal.tscn")
@@ -26,7 +24,7 @@ onready var Objects := get_node("FlyingStage/Objects")
 onready var Controls := get_node("CanvasLayer/Controls")
 
 onready var HUD := get_node("CanvasLayer/HUD")
-onready var LifesRef := get_node("CanvasLayer/HUD/VBoxContainer/Lifes")
+onready var Health := get_node("CanvasLayer/HUD/VBoxContainer/Health")
 onready var Stamina := get_node("CanvasLayer/HUD/VBoxContainer/Stamina")
 onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
 onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
@@ -57,15 +55,6 @@ func set_stage(stage : int) -> void:
 			remove_child(WalkingStage)
 		HUD.visible = Stage == Stages.Flying
 
-export(int, 0, 3) var Lifes := 1 setget set_lifes
-func set_lifes(lifes : int) -> void:
-	Lifes = lifes
-	if is_instance_valid(LifesRef):
-		while LifesRef.get_child_count() < Lifes:
-			LifesRef.add_child(Life.instance())
-		while LifesRef.get_child_count() > Lifes:
-			LifesRef.remove_child(Life.instance())
-	if Lifes <= 0: summary()
 export(float, 0.0, 1000.0) var Flight := 0.0
 
 export(float, 0.0, 100.0) var Gravity := 9.8
@@ -93,7 +82,6 @@ func _ready():
 	SummaryRef.hide()
 	
 	set_stage(Stage)
-	set_lifes(Lifes)
 	
 	get_node("/root/Menu").connect("retire", self, "summary")
 
@@ -164,6 +152,7 @@ func _process(delta : float) -> void:
 			Flight += (FallSpeed / 15) * delta
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 			
+			Health.value = Kiwi.Health
 			Stamina.value = Kiwi.Stamina
 			Feathers.text = str(get_node("/root/Session").Feathers)
 			Stats.text = PoolStringArray([
@@ -191,11 +180,16 @@ func _on_Gauge_hit(value):
 
 
 # Flying stage
-func _on_Kiwi_crashed():
+func _on_Kiwi_hit():
 	FallSpeed = clamp(FallSpeed - FallSpeed * 0.03, 0.0, get_max_speed())
 
+func _on_Kiwi_crashed():
+	summary()
+
 func _on_Kiwi_exited():
-	FlyingAnimationPlayer.play("start")
+	Kiwi.Health -= 25
+	if Kiwi.Health > 0:
+		FlyingAnimationPlayer.play("start")
 
 
 func _on_Play_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/Kiwi/Flying/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=11]
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=12]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=13]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.152941, 1, 0, 1 )
@@ -595,31 +598,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lifes" type="HBoxContainer" parent="CanvasLayer/HUD/VBoxContainer"]
+[node name="Health" type="ProgressBar" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_right = 158.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+custom_styles/fg = SubResource( 12 )
+value = 50.0
+percent_visible = false
 
 [node name="Stamina" type="ProgressBar" parent="CanvasLayer/HUD/VBoxContainer"]
-margin_top = 4.0
+margin_top = 20.0
 margin_right = 158.0
-margin_bottom = 20.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 0, 16 )
 custom_styles/fg = SubResource( 11 )
 value = 50.0
 percent_visible = false
 
 [node name="Feathers" type="ToolButton" parent="CanvasLayer/HUD/VBoxContainer"]
-margin_top = 24.0
+margin_top = 40.0
 margin_right = 158.0
-margin_bottom = 39.0
+margin_bottom = 55.0
 custom_fonts/font = SubResource( 1 )
 text = "00000000000"
 icon = ExtResource( 7 )
 align = 0
 
 [node name="Stats" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
-margin_top = 43.0
+margin_top = 59.0
 margin_right = 158.0
-margin_bottom = 112.0
+margin_bottom = 128.0
 custom_fonts/font = SubResource( 1 )
 text = "FLIGHT : 0000000
 HIGHSCORE :
@@ -804,7 +812,7 @@ shape = SubResource( 10 )
 ]]
 
 [node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Barriers"]
-position = Vector2( 62, 77.5 )
+position = Vector2( 62, 75 )
 rotation = 1.5708
 shape = SubResource( 5 )
 
@@ -818,3 +826,4 @@ scale = Vector2( 0.55, 0.55 )
 [connection signal="hit" from="WalkingStage/Gauge" to="." method="_on_Gauge_hit"]
 [connection signal="crashed" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_crashed"]
 [connection signal="exited" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_exited"]
+[connection signal="hit" from="FlyingStage/Kiwi" to="." method="_on_Kiwi_hit"]

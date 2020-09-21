@@ -10,6 +10,8 @@ onready var CollisionPolygon2DRef := CollisionPolygon2D.new()
 enum Types { Pickable, Obstruction }
 export(Types) var Type := Types.Pickable
 
+export(float, 0.0, 100.0) var Damage := 0.0
+
 
 
 # Core

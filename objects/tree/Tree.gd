@@ -20,4 +20,5 @@ func set_version(version : int) -> void:
 
 # Core
 func _ready():
+	Damage = 4
 	set_version(Version)
