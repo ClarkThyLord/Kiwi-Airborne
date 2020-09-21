@@ -36,14 +36,24 @@ enum Powers { Dash, Invincible, Attract }
 export(Powers) var Power := Powers.Dash
 export(float, 0.0, 100.0) var PowerCost := 25.0
 
+export(float, 0.0, 1.0) var DamanageReduction := 0.0
+
 
 
 # Core
 func _ready():
 	Speed += get_node("/root/Session").get_upgrade_boost("speed")
+	HealthRegen += get_node("/root/Session").get_upgrade_boost("health_regen")
+	StaminaRegen += get_node("/root/Session").get_upgrade_boost("stamina_regen")
+	DamanageReduction += get_node("/root/Session").get_upgrade_boost("damage_reduction")
+
+
+func damage(_damage : float) -> void:
+	set_health(Health - (_damage - (_damage * DamanageReduction)))
 
 
 func _physics_process(delta : float):
+	set_health(Health + HealthRegen * delta)
 	set_stamina(Stamina + StaminaRegen * delta)
 	
 	var direction : Vector2
@@ -92,12 +102,14 @@ func _physics_process(delta : float):
 	
 	if is_instance_valid(hit):
 		if hit.collider.is_in_group("pickable"): hit.collider.pick()
-		elif hit.collider.is_in_group("ends"): emit_signal("exited")
+		elif hit.collider.is_in_group("ends"):
+			damage(25)
+			emit_signal("exited")
 		else:
-			var damage := 1
+			var _damage := 1
 			if hit.collider.is_in_group("obstruction"):
-				damage = hit.collider.Damage
-			set_health(Health - damage)
+				_damage = hit.collider.Damage
+			damage(_damage)
 			emit_signal("hit")
 
 

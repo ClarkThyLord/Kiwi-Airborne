@@ -79,10 +79,13 @@ func _update() -> void:
 		UpgradesRef.remove_child(child)
 		child.queue_free()
 	
+	var more := false
 	for upgrade in Upgrades:
 		if get_node("/root/Session").Highscore >= upgrade["highscore"]:
 			var upgrade_ref := Upgrade.instance()
 			upgrade_ref.Info = upgrade
 			UpgradesRef.add_child(upgrade_ref)
 			upgrade_ref.connect("bought", self, "_update")
-	UpgradesRef.add_child(ShowMore)
+		else: more = true
+	if more:
+		UpgradesRef.add_child(ShowMore)

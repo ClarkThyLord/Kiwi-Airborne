@@ -75,7 +75,10 @@ func _ready():
 	
 	randomize()
 	
+	Gravity += get_node("/root/Session").get_upgrade_boost("gravity")
+	FallSpeed += get_node("/root/Session").get_upgrade_boost("starting_speed")
 	FallSpeedMax += get_node("/root/Session").get_upgrade_boost("speed_max")
+	Luck = get_node("/root/Session").get_upgrade_boost("luck")
 	
 	Controls.hide()
 	HUD.hide()
@@ -187,7 +190,6 @@ func _on_Kiwi_crashed():
 	summary()
 
 func _on_Kiwi_exited():
-	Kiwi.Health -= 25
 	if Kiwi.Health > 0:
 		FlyingAnimationPlayer.play("start")
 
