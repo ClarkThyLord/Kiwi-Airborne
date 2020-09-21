@@ -5,7 +5,7 @@ class_name Gauge
 
 
 # Declarations
-signal hit(value)
+signal hit(gold)
 
 export(bool) var Active := false
 
@@ -36,7 +36,7 @@ func _process(delta):
 	update()
 	if Active and Input.is_action_just_released("action_activate"):
 		if Oneshot: Active = false
-		emit_signal("hit", 2.0 if GoalRect.encloses(MarkerRect) else MarkerPosition)
+		emit_signal("hit", GoalRect.has_point(MarkerRect.position + (MarkerRect.size / 2)))
 
 func _draw():
 	draw_rect(Rect2(Vector2.ZERO, get_rect().size), BackgroundColor)

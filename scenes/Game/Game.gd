@@ -178,8 +178,9 @@ func _on_Timer_timeout():
 
 
 # Jump stage
-func _on_Gauge_hit(value):
-	WalkingAnimationPlayer.play("jump")
+func _on_Gauge_hit(goal : bool):
+	if goal: FallSpeed += FallSpeed * 0.25
+	WalkingAnimationPlayer.play("jump_gold" if goal else "jump")
 
 
 # Flying stage
