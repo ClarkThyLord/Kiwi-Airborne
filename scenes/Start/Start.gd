@@ -15,3 +15,7 @@ func _on_Help_pressed():
 
 func _on_Settings_pressed():
 	get_node("/root/Menu").open(get_node("/root/Menu").TABS.Settings)
+
+
+func _on_GitHub_pressed():
+	OS.shell_open("https://github.com/ClarkThyLord/Kiwi-Airborne")
