@@ -157,7 +157,7 @@ func _process(delta : float) -> void:
 					if randf() < Luck: break
 			
 			
-			$Background/Mountains.region_rect.position.y += (FallSpeed / 750) * delta
+			$Background/Mountains.region_rect.position.y += (FallSpeed / 250) * delta
 			$FlyingStage/Walls/Texture.region_rect.position.y += FallSpeed * delta
 			for object in Objects.get_children():
 				object.position.y -= FallSpeed * delta
