@@ -3,7 +3,8 @@ extends KinematicBody2D
 
 
 # Refrences
-onready var AnimationPlayerRef := get_node("AnimationPlayer")
+onready var AnimationsHead := get_node("AnimationPlayerHead")
+onready var AnimationsBody := get_node("AnimationPlayerBody")
 
 
 
@@ -23,7 +24,7 @@ export(float, 0.0, 10.0) var BoostCost := 3.0
 
 var PowerTimer := 0.0
 export(bool) var PowerActive := false
-enum Powers { Dash, Invincible }
+enum Powers { Dash, Invincible, Attract }
 export(Powers) var Power := Powers.Dash
 
 
@@ -53,9 +54,11 @@ func _physics_process(delta : float):
 		pass
 	
 	if direction.x < 0:
-		AnimationPlayerRef.play("left")
+		AnimationsHead.play("left")
 	elif direction.x > 0:
-		AnimationPlayerRef.play("right")
+		AnimationsHead.play("right")
+	else:
+		AnimationsHead.play("straight")
 	
 	var hit := move_and_collide(velocity * delta)
 	
