@@ -170,17 +170,21 @@ func _process(delta : float) -> void:
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 			
 			
-			if int(Flight) == 200 and get_node("/root/Session").Highscore < Flight:
+			if int(Flight) == 50 and get_node("/root/Session").Highscore < Flight:
 				Flight += 1
 				Story.show_story(2)
+				get_node("/root/Session").Highscore = 50
+			elif int(Flight) == 200 and get_node("/root/Session").Highscore < Flight:
+				Flight += 1
+				Story.show_story(3)
 				get_node("/root/Session").Highscore = 200
 			elif int(Flight) == 450 and get_node("/root/Session").Highscore < Flight:
 				Flight += 1
-				Story.show_story(3)
+				Story.show_story(4)
 				get_node("/root/Session").Highscore = 450
 			elif int(Flight) == 1000 and get_node("/root/Session").Highscore < Flight:
 				Flight += 1
-				Story.show_story(4)
+				Story.show_story(5)
 				get_node("/root/Session").Highscore = 1000
 			
 			Health.value = Kiwi.Health

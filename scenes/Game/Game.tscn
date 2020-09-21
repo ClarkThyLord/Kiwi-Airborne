@@ -1141,7 +1141,6 @@ shape = SubResource( 12 )
 [node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
 position = Vector2( 62, -13 )
 scale = Vector2( 0.55, 0.55 )
-HealthRegen = 100.0
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="gui_input" from="CanvasLayer/Controls" to="." method="_on_Controls_gui_input"]
 [connection signal="pressed" from="CanvasLayer/Summary/TextureRect/VBoxContainer/HBoxContainer/Play" to="." method="_on_Play_pressed"]

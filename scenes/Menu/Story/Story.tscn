@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/story/1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/story/2.png" type="Texture" id=4]
 [ext_resource path="res://assets/story/4.png" type="Texture" id=5]
 [ext_resource path="res://assets/story/3.png" type="Texture" id=6]
+[ext_resource path="res://assets/story/5.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -33,7 +34,7 @@ size_flags_vertical = 3
 texture = ExtResource( 2 )
 stretch_mode = 6
 
-[node name="200M" type="TextureRect" parent="."]
+[node name="50M" type="TextureRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,7 +46,7 @@ size_flags_vertical = 3
 texture = ExtResource( 4 )
 stretch_mode = 6
 
-[node name="450M" type="TextureRect" parent="."]
+[node name="200M" type="TextureRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,7 +58,7 @@ size_flags_vertical = 3
 texture = ExtResource( 6 )
 stretch_mode = 6
 
-[node name="\?" type="TextureRect" parent="."]
+[node name="450M" type="TextureRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -67,5 +68,17 @@ margin_right = -16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 5 )
+stretch_mode = 6
+
+[node name="\?" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 23.0
+margin_right = -16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
 stretch_mode = 6
 [connection signal="visibility_changed" from="." to="." method="_on_Story_visibility_changed"]
