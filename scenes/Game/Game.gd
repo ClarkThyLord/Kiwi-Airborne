@@ -27,6 +27,7 @@ onready var Controls := get_node("CanvasLayer/Controls")
 
 onready var HUD := get_node("CanvasLayer/HUD")
 onready var LifesRef := get_node("CanvasLayer/HUD/VBoxContainer/Lifes")
+onready var Stamina := get_node("CanvasLayer/HUD/VBoxContainer/Stamina")
 onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
 onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
 
@@ -163,6 +164,7 @@ func _process(delta : float) -> void:
 			Flight += (FallSpeed / 15) * delta
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 			
+			Stamina.value = Kiwi.Stamina
 			Feathers.text = str(get_node("/root/Session").Feathers)
 			Stats.text = PoolStringArray([
 				"FLIGHT : " + str(int(Flight)) + " M\n",
