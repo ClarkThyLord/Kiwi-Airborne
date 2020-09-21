@@ -4,12 +4,14 @@ extends Node
 
 
 # Declarations
-const VERSION := "0.0.3"
+const VERSION := "0.0.4"
 
 var Highscore := 0
 var Feathers := 0
 
 var Upgrades := {}
+
+var Audio := true
 
 
 
@@ -24,7 +26,12 @@ func _save() -> void:
 			"highscore": Highscore,
 			"feathers": Feathers,
 			
-			"upgrades": Upgrades
+			"upgrades": Upgrades,
+			
+			"audio": Audio,
+			"master": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")),
+			"music": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")),
+			"sound_effects": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SoundEffects")),
 		}))
 		save.close()
 
@@ -44,6 +51,14 @@ func _load() -> void:
 		Feathers = save_data["feathers"]
 		
 		Upgrades = save_data["upgrades"]
+		
+		Audio = save_data["audio"]
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), save_data.get("master", 0) <= -40 and not Audio)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), save_data.get("master", 0))
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), save_data.get("music", 0) <= -40)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), save_data.get("music", 0))
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffects"), save_data.get("sound_effects", 0) <= -40)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"), save_data.get("sound_effects", 0))
 	else: _reset()
 
 func _reset() -> void:
