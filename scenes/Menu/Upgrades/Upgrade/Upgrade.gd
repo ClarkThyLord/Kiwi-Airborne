@@ -25,7 +25,7 @@ export(float, 0, 100) var Boost := 0.0 setget set_boost
 func set_boost(boost : float) -> void:
 	Boost = boost
 	if is_instance_valid(BoostRef):
-		BoostRef.text = str(round(boost)) + "+"
+		BoostRef.text = str(boost) + "+"
 
 export(int, 0, 10) var Level := 0 setget set_level
 func set_level(level : int) -> void:
