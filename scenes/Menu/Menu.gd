@@ -4,7 +4,7 @@ extends CanvasLayer
 
 # Refrences
 onready var Content := get_node("Content")
-onready var TabContainerRef := get_node("Content/Control/TabContainer")
+onready var TabContainerRef := get_node("Content/Control/TextureRect/VBoxContainer/TabContainer")
 
 
 
@@ -12,7 +12,7 @@ onready var TabContainerRef := get_node("Content/Control/TabContainer")
 signal retire
 
 
-enum TABS { Options, Help, Settings }
+enum TABS { Options, Upgrades, Help, Settings }
 
 
 

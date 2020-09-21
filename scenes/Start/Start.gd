@@ -3,6 +3,10 @@ extends Control
 
 
 # Core
+func _ready():
+	get_tree().paused = false
+
+
 func _on_Play_pressed():
 	get_tree().change_scene("res://scenes/Game/Game.tscn")
 

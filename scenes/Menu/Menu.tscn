@@ -5,12 +5,12 @@
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=4]
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
+[sub_resource type="DynamicFont" id=1]
+size = 36
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 64
+size = 36
 font_data = ExtResource( 3 )
 
 [node name="Menu" type="CanvasLayer"]
@@ -54,50 +54,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="Content/Control"]
-anchor_left = 0.08
-anchor_top = 0.098
-anchor_right = 0.92
-anchor_bottom = 0.926
-margin_left = 15.0
-margin_top = 15.0
-margin_right = -15.0
-margin_bottom = -15.0
-custom_fonts/font = SubResource( 3 )
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Control/TextureRect"]
+anchor_left = 0.0817717
+anchor_top = 0.0975
+anchor_right = 0.921635
+anchor_bottom = 0.9275
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TabContainer" type="TabContainer" parent="Content/Control/TextureRect/VBoxContainer"]
+margin_right = 473.0
+margin_bottom = 285.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="VBoxContainer" parent="Content/Control/TabContainer"]
-visible = false
+[node name="Upgrades" type="VBoxContainer" parent="Content/Control/TextureRect/VBoxContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 20.0
+margin_top = 23.0
 margin_right = -16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
 alignment = 1
 
-[node name="Resume" type="Button" parent="Content/Control/TabContainer/Options"]
-margin_top = 84.0
-margin_right = 431.0
-margin_bottom = 124.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
-text = "RESUME"
-
-[node name="Retire" type="Button" parent="Content/Control/TabContainer/Options"]
-margin_top = 156.0
-margin_right = 431.0
-margin_bottom = 196.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
-text = "RETIRE"
-
-[node name="Help" type="TextureRect" parent="Content/Control/TabContainer"]
+[node name="Help" type="TextureRect" parent="Content/Control/TextureRect/VBoxContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,7 +101,8 @@ texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
-[node name="Settings" type="VBoxContainer" parent="Content/Control/TabContainer"]
+[node name="Settings" type="VBoxContainer" parent="Content/Control/TextureRect/VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -120,7 +112,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Restart" type="Button" parent="Content/Control/TabContainer/Settings"]
+[node name="Restart" type="Button" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings"]
 margin_top = 120.0
 margin_right = 431.0
 margin_bottom = 160.0
@@ -128,8 +120,33 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RESTART"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/Control/TextureRect/VBoxContainer"]
+margin_top = 289.0
+margin_right = 473.0
+margin_bottom = 312.0
+custom_constants/separation = 64
+alignment = 1
+
+[node name="Resume" type="Button" parent="Content/Control/TextureRect/VBoxContainer/HBoxContainer"]
+margin_right = 204.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
+text = "RESUME"
+
+[node name="Retire" type="Button" parent="Content/Control/TextureRect/VBoxContainer/HBoxContainer"]
+margin_left = 268.0
+margin_right = 473.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
+text = "RETIRE"
 [connection signal="gui_input" from="Content/Background" to="." method="_on_Background_gui_input"]
-[connection signal="pressed" from="Content/Control/TabContainer/Options/Resume" to="." method="close"]
-[connection signal="pressed" from="Content/Control/TabContainer/Options/Retire" to="." method="close"]
-[connection signal="pressed" from="Content/Control/TabContainer/Options/Retire" to="." method="_on_Retire_pressed"]
-[connection signal="pressed" from="Content/Control/TabContainer/Settings/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/HBoxContainer/Resume" to="." method="close"]
+[connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/HBoxContainer/Retire" to="." method="close"]
+[connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/HBoxContainer/Retire" to="." method="_on_Retire_pressed"]

@@ -47,6 +47,7 @@ func _load() -> void:
 	else: _reset()
 
 func _reset() -> void:
+	pause_mode = PAUSE_MODE_PROCESS
 	Highscore = 0
 	Feathers = 0
 	Boosts.clear()

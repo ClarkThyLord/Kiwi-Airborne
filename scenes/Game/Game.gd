@@ -3,8 +3,11 @@ extends Node2D
 
 
 # Imports
-const Feather := preload("res://objects/feather/Feather.tscn")
+const Life := preload("res://controls/Life.tscn")
+
 const Rock := preload("res://objects/rock/Rock.tscn")
+
+const Feather := preload("res://objects/feather/Feather.tscn")
 
 
 
@@ -19,9 +22,14 @@ onready var Kiwi := get_node("FlyingStage/Kiwi")
 onready var Objects := get_node("FlyingStage/Objects")
 
 onready var Controls := get_node("CanvasLayer/Controls")
+
 onready var HUD := get_node("CanvasLayer/HUD")
+onready var LifesRef := get_node("CanvasLayer/HUD/VBoxContainer/Lifes")
 onready var Feathers := get_node("CanvasLayer/HUD/VBoxContainer/Feathers")
 onready var Stats := get_node("CanvasLayer/HUD/VBoxContainer/Stats")
+
+onready var SummaryRef := get_node("CanvasLayer/Summary")
+onready var SummaryStats := get_node("CanvasLayer/Summary/TextureRect/VBoxContainer/Stats")
 
 
 
@@ -46,6 +54,15 @@ func set_stage(stage : int) -> void:
 			remove_child(WalkingStage)
 		HUD.visible = Stage == Stages.Flying
 
+export(int, 0, 3) var Lifes := 1 setget set_lifes
+func set_lifes(lifes : int) -> void:
+	Lifes = lifes
+	if is_instance_valid(LifesRef):
+		while LifesRef.get_child_count() < Lifes:
+			LifesRef.add_child(Life.instance())
+		while LifesRef.get_child_count() > Lifes:
+			LifesRef.remove_child(Life.instance())
+	if Lifes <= 0: summary()
 export(float, 0.0, 1000.0) var Flight := 0.0
 
 export(float, 0.0, 100.0) var Gravity := 9.8
@@ -62,8 +79,17 @@ var Spawns := [Vector2(15, 100), Vector2(119, 100)]
 
 # Core
 func _ready():
+	get_tree().paused = false
+	
 	randomize()
+	
+	Controls.hide()
+	HUD.hide()
+	SummaryRef.hide()
+	
 	set_stage(Stage)
+	set_lifes(Lifes)
+	
 	get_node("/root/Menu").connect("retire", self, "summary")
 
 
@@ -72,8 +98,20 @@ func get_max_speed() -> float:
 
 
 func summary() -> void:
+	get_tree().paused = true
+	$CanvasLayer/Summary/TextureRect/VBoxContainer/Highscore.visible = get_node("/root/Session").Highscore < Flight
 	if get_node("/root/Session").Highscore < Flight:
 		get_node("/root/Session").Highscore = Flight
+	
+	SummaryStats.text = PoolStringArray([
+		"FLIGHT   : " + str(int(Flight)) + " M\n",
+		"FEATHERS : " + str(get_node("/root/Session").Feathers)
+	]).join("")
+	
+	Controls.hide()
+	HUD.hide()
+	SummaryRef.show()
+	
 	get_node("/root/Session")._save()
 
 
@@ -117,6 +155,9 @@ func _process(delta : float) -> void:
 				object.position.y -= FallSpeed * delta
 			
 			
+			if FallSpeed < 20:
+				summary()
+			
 			Flight += (FallSpeed / 15) * delta
 			FallSpeed = clamp(FallSpeed + Gravity * delta, 0.0, get_max_speed())
 			
@@ -137,6 +178,7 @@ func _on_Controls_gui_input(event):
 
 func _on_Timer_timeout():
 	$CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a = 0 if $CanvasLayer/Controls/VBoxContainer/Prompt.modulate.a == 1 else 1
+	$CanvasLayer/Summary/TextureRect/VBoxContainer/Highscore.modulate.a = 0 if $CanvasLayer/Summary/TextureRect/VBoxContainer/Highscore.modulate.a == 1 else 1
 
 
 # Jump stage
@@ -150,3 +192,10 @@ func _on_Kiwi_crashed():
 
 func _on_Kiwi_exited():
 	FlyingAnimationPlayer.play("start")
+
+
+func _on_Play_pressed():
+	get_tree().change_scene("res://scenes/Game/Game.tscn")
+
+func _on_Upgrades_pressed():
+	get_node("/root/Menu")
