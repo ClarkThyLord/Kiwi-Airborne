@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Menu/Upgrades/Upgrades.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -77,23 +78,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Upgrades" type="VBoxContainer" parent="Content/Control/TextureRect/VBoxContainer/TabContainer"]
+[node name="Upgrades" parent="Content/Control/TextureRect/VBoxContainer/TabContainer" instance=ExtResource( 5 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 23.0
 margin_right = -16.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 32
-alignment = 1
+margin_bottom = 0.0
 
 [node name="Help" type="TextureRect" parent="Content/Control/TextureRect/VBoxContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 20.0
+margin_top = 23.0
 margin_right = -16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -106,7 +104,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 20.0
+margin_top = 23.0
 margin_right = -16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -146,6 +144,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RETIRE"
 [connection signal="visibility_changed" from="Content" to="." method="_on_Content_visibility_changed"]
+[connection signal="visibility_changed" from="Content" to="Content/Control/TextureRect/VBoxContainer/TabContainer/Upgrades" method="_update"]
 [connection signal="gui_input" from="Content/Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="Content/Control/TextureRect/VBoxContainer/HBoxContainer/Resume" to="." method="close"]

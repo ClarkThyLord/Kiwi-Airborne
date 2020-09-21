@@ -4,12 +4,12 @@ extends Node
 
 
 # Declarations
-const VERSION := "0.0.2"
+const VERSION := "0.0.3"
 
 var Highscore := 0
 var Feathers := 0
 
-var Boosts := {}
+var Upgrades := {}
 
 
 
@@ -24,7 +24,7 @@ func _save() -> void:
 			"highscore": Highscore,
 			"feathers": Feathers,
 			
-			"boosts": Boosts
+			"upgrades": Upgrades
 		}))
 		save.close()
 
@@ -43,19 +43,31 @@ func _load() -> void:
 		Highscore = save_data["highscore"]
 		Feathers = save_data["feathers"]
 		
-		Boosts = save_data["boosts"]
+		Upgrades = save_data["upgrades"]
 	else: _reset()
 
 func _reset() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
 	Highscore = 0
 	Feathers = 0
-	Boosts.clear()
+	Upgrades.clear()
 	_save()
 
 
 func _ready() -> void: _load()
 
 
-func get_boost(boost : String) -> float:
-	return Boosts.get(boost, 0.0)
+func set_upgrade(upgrade : String, boost : float, level : int) -> void:
+	if not Upgrades.has(upgrade):
+		Upgrades[upgrade] = {
+			"boost": 0.0,
+			"level": 0
+		}
+	Upgrades[upgrade]["boost"] += boost
+	Upgrades[upgrade]["level"] += level
+
+func get_upgrade_boost(upgrade : String) -> float:
+	return Upgrades.get(upgrade, {}).get("boost", 0.0)
+
+func get_upgrade_level(upgrade : String) -> int:
+	return Upgrades.get(upgrade, {}).get("level", 0)

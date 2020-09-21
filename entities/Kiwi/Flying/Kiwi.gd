@@ -17,8 +17,8 @@ export(float) var Speed := 300.0
 
 # Core
 func _ready():
-	if not Engine.editor_hint:
-		Speed += get_node("/root/Session").get_boost("max_kiwi_speed")
+	# TODO Boost
+	pass
 
 
 func _physics_process(delta : float):

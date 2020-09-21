@@ -69,7 +69,7 @@ export(float, 0.0, 1000.0) var Flight := 0.0
 
 export(float, 0.0, 100.0) var Gravity := 9.8
 export(float, 0.0, 250.0) var FallSpeed := 36.0
-export(float, 0.0, 300.0) var FallSpeedMax := 125
+export(float, 0.0, 300.0) var FallSpeedMax := 125.0
 
 export(float, 0.0, 1.0) var Luck := 0.3
 export(int, 0, 100) var MaxObstructions := 10
@@ -85,6 +85,8 @@ func _ready():
 	
 	randomize()
 	
+	# TODO Boost
+	
 	Controls.hide()
 	HUD.hide()
 	SummaryRef.hide()
@@ -96,7 +98,7 @@ func _ready():
 
 
 func get_max_speed() -> float:
-	return FallSpeedMax + get_node("/root/Session").get_boost("max_fall_speed")
+	return FallSpeedMax
 
 
 func summary() -> void:
@@ -134,7 +136,7 @@ func _process(delta : float) -> void:
 					var chance := 1 # Rocks
 					if Flight > 200: chance += 1 # Trees
 					if Flight > 450: chance += 1 # Crystals
-					match randi() % 3:
+					match randi() % chance:
 						1: obstruction = TreeClass.instance()
 						2: obstruction = Crystal.instance()
 						_: obstruction = Rock.instance()
@@ -198,4 +200,4 @@ func _on_Play_pressed():
 	get_tree().change_scene("res://scenes/Game/Game.tscn")
 
 func _on_Upgrades_pressed():
-	get_node("/root/Menu")
+	get_node("/root/Menu").open()
