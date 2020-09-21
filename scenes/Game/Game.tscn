@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://entities/Kiwi/Flying/Kiwi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Game/Game.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://assets/game/controls.prompt.png" type="Texture" id=11]
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=12]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=13]
+[ext_resource path="res://assets/audio/Ride_of_the_Valkyries.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/audio/Morning_Farm.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/audio/arrowHit01.wav" type="AudioStream" id=16]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
@@ -259,7 +262,7 @@ tracks/17/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 2.9
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
 tracks/0/interp = 1
@@ -483,15 +486,43 @@ tracks/18/loop_wrap = true
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/keys = {
-"times": PoolRealArray( 2.9 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "update": 2,
 "values": [ 1 ]
 }
+tracks/19/type = "method"
+tracks/19/path = NodePath("../MusicPlaying")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/20/type = "method"
+tracks/20/path = NodePath("../MusicWait")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "jump_gold"
-length = 4.0
+length = 3.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
 tracks/0/interp = 1
@@ -715,10 +746,38 @@ tracks/18/loop_wrap = true
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/keys = {
-"times": PoolRealArray( 2.9 ),
+"times": PoolRealArray( 3.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 2,
 "values": [ 1 ]
+}
+tracks/19/type = "method"
+tracks/19/path = NodePath("../MusicPlaying")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/20/type = "method"
+tracks/20/path = NodePath("../MusicWait")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -757,6 +816,22 @@ extents = Vector2( 5, 60 )
 [node name="World" type="Node2D"]
 scale = Vector2( 8.258, 8.219 )
 script = ExtResource( 2 )
+
+[node name="MusicPlaying" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 14 )
+bus = "Music"
+
+[node name="MusicWait" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 15 )
+autoplay = true
+bus = "Music"
+
+[node name="Lost" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 16 )
+bus = "SoundEffects"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -1039,6 +1114,7 @@ shape = SubResource( 12 )
 position = Vector2( 62, -20 )
 rotation = 1.5708
 shape = SubResource( 13 )
+disabled = true
 
 [node name="Barriers" type="StaticBody2D" parent="FlyingStage" groups=[
 "barriers",
@@ -1050,7 +1126,7 @@ rotation = 1.5708
 shape = SubResource( 12 )
 
 [node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
-position = Vector2( 62, 9 )
+position = Vector2( 62, -13 )
 scale = Vector2( 0.55, 0.55 )
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="gui_input" from="CanvasLayer/Controls" to="." method="_on_Controls_gui_input"]

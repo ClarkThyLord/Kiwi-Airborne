@@ -12,6 +12,10 @@ const Feather := preload("res://objects/feather/Feather.tscn")
 
 
 # Refrences
+onready var PlayingMusic := get_node("MusicPlaying")
+onready var WaitingMusic := get_node("MusicWait")
+onready var Lost := get_node("Lost")
+
 onready var WalkingStage := get_node("WalkingStage")
 onready var WalkingAnimationPlayer := get_node("WalkingStage/AnimationPlayer")
 onready var JumpingGauge := get_node("WalkingStage/Gauge")
@@ -95,6 +99,9 @@ func get_max_speed() -> float:
 
 func summary() -> void:
 	get_tree().paused = true
+	PlayingMusic.stop()
+	WaitingMusic.play()
+	Lost.play()
 	$CanvasLayer/Summary/TextureRect/VBoxContainer/Highscore.visible = get_node("/root/Session").Highscore < Flight
 	if get_node("/root/Session").Highscore < Flight:
 		get_node("/root/Session").Highscore = Flight

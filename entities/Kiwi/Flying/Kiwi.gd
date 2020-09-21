@@ -5,6 +5,7 @@ extends KinematicBody2D
 # Refrences
 onready var AnimationsHead := get_node("AnimationPlayerHead")
 onready var AnimationsBody := get_node("AnimationPlayerBody")
+onready var SwooshAudio := get_node("AudioStreamPlayer")
 onready var TweenRef := get_node("Tween")
 
 
@@ -86,6 +87,7 @@ func _physics_process(delta : float):
 					0.1
 				)
 				TweenRef.start()
+				SwooshAudio.play()
 			Powers.Invincible:
 				pass
 			Powers.Attract:

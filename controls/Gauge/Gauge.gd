@@ -4,10 +4,20 @@ class_name Gauge
 
 
 
+# Refrences
+onready var ShufflingNoise := AudioStreamPlayer.new()
+onready var RingNoise := AudioStreamPlayer.new()
+
+
+
 # Declarations
 signal hit(gold)
 
-export(bool) var Active := false
+export(bool) var Active := false setget set_active
+func set_active(active : bool) -> void:
+	Active = active
+	if not Engine.editor_hint and is_instance_valid(ShufflingNoise):
+		ShufflingNoise.play() if Active else ShufflingNoise.stop()
 
 export(bool) var Oneshot := true
 
@@ -30,13 +40,24 @@ export(Color) var BackgroundColor := Color.lightblue
 # Core
 func _ready():
 	rect_clip_content = true
+	
+	ShufflingNoise.stream = preload("res://assets/audio/Mechanical_Clock_Ring.wav")
+	ShufflingNoise.bus = "SoundEffects"
+	add_child(ShufflingNoise)
+	RingNoise.stream = preload("res://assets/audio/Ship_Bell.wav")
+	RingNoise.bus = "SoundEffects"
+	add_child(RingNoise)
 
 
 func _process(delta):
 	update()
 	if Active and Input.is_action_just_released("action_activate"):
-		if Oneshot: Active = false
-		emit_signal("hit", GoalRect.has_point(MarkerRect.position + (MarkerRect.size / 2)))
+		if Oneshot:
+			Active = false
+			ShufflingNoise.stop()
+		var gold := GoalRect.has_point(MarkerRect.position + (MarkerRect.size / 2))
+		if gold: RingNoise.play()
+		emit_signal("hit", gold)
 
 func _draw():
 	draw_rect(Rect2(Vector2.ZERO, get_rect().size), BackgroundColor)

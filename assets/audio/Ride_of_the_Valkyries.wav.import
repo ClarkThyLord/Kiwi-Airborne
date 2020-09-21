@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Ride_of_the_Valkyries.wav-1ced30395acdea885f731dc81ad9f365.sample"
+
+[deps]
+
+source_file="res://assets/audio/Ride_of_the_Valkyries.wav"
+dest_files=[ "res://.import/Ride_of_the_Valkyries.wav-1ced30395acdea885f731dc81ad9f365.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

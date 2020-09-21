@@ -34,6 +34,14 @@ This game wouldn't be possible without all the awesome and open source tools lis
  - [Godot](https://github.com/godotengine/godot)
  - [Krita](https://invent.kde.org/graphics/krita)
  - [Notepad++](https://github.com/notepad-plus-plus/notepad-plus-plus)
+ - [Audacity](https://github.com/audacity/audacity)
  - [FontLibrary](https://fontlibrary.org/en)
    - [Cave-Story](https://fontlibrary.org/en/font/cave-story)
+ - [Youtube-Audiolibrary](https://youtube.com/audiolibrary/music)
+   - Ride of the Valkyries (by Wagner)
+   - Swoosh
+   - Mechanical_Clock_Ring
+   - Ship_Bell
+ - [OpenGameArt](https://opengameart.org/)
+   - [Arrow hit twang](https://opengameart.org/content/arrow-hit-twang)
  
