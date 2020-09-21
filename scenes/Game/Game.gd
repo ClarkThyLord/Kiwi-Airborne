@@ -82,7 +82,7 @@ func _ready():
 	Gravity += get_node("/root/Session").get_upgrade_boost("gravity")
 	FallSpeed += get_node("/root/Session").get_upgrade_boost("starting_speed")
 	FallSpeedMax += get_node("/root/Session").get_upgrade_boost("speed_max")
-	Luck = get_node("/root/Session").get_upgrade_boost("luck")
+	Luck += get_node("/root/Session").get_upgrade_boost("luck")
 	
 	Controls.hide()
 	HUD.hide()

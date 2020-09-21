@@ -1079,6 +1079,15 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Active = false
+Oneshot = true
+MarkerRatio = 0.1
+ConstantMaker = true
+MarkerColor = Color( 0, 0, 1, 1 )
+GoalRatio = 0.25
+GoalPosition = 0.5
+GoalColor = Color( 1, 0.84, 0, 1 )
+BackgroundColor = Color( 0.68, 0.85, 0.9, 1 )
 
 [node name="FlyingStage" type="Node2D" parent="."]
 visible = false

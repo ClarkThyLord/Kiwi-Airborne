@@ -37,14 +37,16 @@ func _process(delta):
 		close() if $Content.visible else open()
 
 
+var paused_before : bool
 func open(tab := TABS.Upgrades) -> void:
 	TabContainerRef.current_tab = tab
 	Content.visible = true
+	paused_before = get_tree().paused
 	get_tree().paused = true
 
 func close() -> void:
 	Content.visible = false
-	get_tree().paused = false
+	get_tree().paused = paused_before
 
 
 func update_settings() -> void:
