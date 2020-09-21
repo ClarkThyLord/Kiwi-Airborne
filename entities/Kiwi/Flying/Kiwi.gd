@@ -17,8 +17,7 @@ export(float) var Speed := 300.0
 
 # Core
 func _ready():
-	# TODO Boost
-	pass
+	Speed += get_node("/root/Session").get_upgrade_boost("speed")
 
 
 func _physics_process(delta : float):

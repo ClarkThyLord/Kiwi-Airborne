@@ -85,7 +85,7 @@ func _ready():
 	
 	randomize()
 	
-	# TODO Boost
+	FallSpeedMax += get_node("/root/Session").get_upgrade_boost("speed_max")
 	
 	Controls.hide()
 	HUD.hide()
