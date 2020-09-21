@@ -6,6 +6,8 @@ extends Node2D
 const Life := preload("res://controls/Life.tscn")
 
 const Rock := preload("res://objects/rock/Rock.tscn")
+const TreeClass := preload("res://objects/Tree/Tree.tscn")
+const Crystal := preload("res://objects/crystal/Crystal.tscn")
 
 const Feather := preload("res://objects/feather/Feather.tscn")
 
@@ -132,11 +134,9 @@ func _process(delta : float) -> void:
 					var chance := 1 # Rocks
 					if Flight > 200: chance += 1 # Trees
 					if Flight > 450: chance += 1 # Crystals
-					if Flight > 750: chance += 1 # Fog
-					match randi() % chance:
-						1: continue
-						2: continue
-						3: continue
+					match randi() % 3:
+						1: obstruction = TreeClass.instance()
+						2: obstruction = Crystal.instance()
 						_: obstruction = Rock.instance()
 					Objects.add_child(obstruction)
 					obstruction.Version = randi() % 6
