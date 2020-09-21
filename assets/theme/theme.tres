@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=30 format=2]
+[gd_resource type="Theme" load_steps=39 format=2]
 
 [ext_resource path="res://assets/fonts/Cave-Story.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/theme/button/hover.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/theme/slider/grabber.png" type="Texture" id=6]
 [ext_resource path="res://assets/theme/slider/grabber.disabled.png" type="Texture" id=7]
 [ext_resource path="res://assets/theme/slider/grabber.highlight.png" type="Texture" id=8]
+[ext_resource path="res://assets/theme/check_box/unchecked.png" type="Texture" id=9]
+[ext_resource path="res://assets/theme/check_box/checked.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -20,6 +22,18 @@ region_rect = Rect2( 0, 0, 26, 3 )
 [sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 26, 3 )
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
 
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 3 )
@@ -34,10 +48,12 @@ modulate_color = Color( 0.870588, 0.870588, 0.870588, 1 )
 color = Color( 0, 0, 0, 0 )
 thickness = 3
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=28]
 
-[sub_resource type="StyleBoxLine" id=9]
-color = Color( 1, 1, 1, 0.607843 )
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxLine" id=30]
+color = Color( 1, 1, 1, 1 )
 thickness = 3
 
 [sub_resource type="DynamicFont" id=10]
@@ -85,6 +101,24 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 3 )
 Button/styles/pressed = SubResource( 4 )
+CheckBox/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckBox/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = ExtResource( 10 )
+CheckBox/icons/radio_checked = ExtResource( 10 )
+CheckBox/icons/radio_unchecked = ExtResource( 9 )
+CheckBox/icons/unchecked = ExtResource( 9 )
+CheckBox/styles/disabled = SubResource( 22 )
+CheckBox/styles/focus = SubResource( 23 )
+CheckBox/styles/hover = SubResource( 24 )
+CheckBox/styles/hover_pressed = SubResource( 25 )
+CheckBox/styles/normal = SubResource( 26 )
+CheckBox/styles/pressed = SubResource( 27 )
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -98,8 +132,9 @@ HSlider/icons/grabber = ExtResource( 6 )
 HSlider/icons/grabber_disabled = ExtResource( 7 )
 HSlider/icons/grabber_highlight = ExtResource( 8 )
 HSlider/icons/tick = null
-HSlider/styles/grabber_area = SubResource( 8 )
-HSlider/styles/slider = SubResource( 9 )
+HSlider/styles/grabber_area = SubResource( 28 )
+HSlider/styles/grabber_area_highlight = SubResource( 29 )
+HSlider/styles/slider = SubResource( 30 )
 LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
 LineEdit/colors/cursor_color = Color( 0.94, 0.94, 0.94, 1 )
@@ -114,7 +149,7 @@ LineEdit/styles/focus = SubResource( 11 )
 LineEdit/styles/normal = SubResource( 12 )
 LineEdit/styles/read_only = SubResource( 13 )
 ProgressBar/colors/font_color = Color( 0.94, 0.94, 0.94, 1 )
-ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/colors/font_color_shadow = Color( 1, 1, 1, 1 )
 ProgressBar/fonts/font = null
 ProgressBar/styles/bg = SubResource( 14 )
 ProgressBar/styles/fg = SubResource( 15 )

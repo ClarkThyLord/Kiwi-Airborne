@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=2]
@@ -10,7 +10,11 @@
 size = 36
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 36
 font_data = ExtResource( 3 )
 
@@ -69,7 +73,7 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="Content/Control/TextureRect/VBoxContainer"]
-margin_right = 473.0
+margin_right = 472.0
 margin_bottom = 285.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -110,18 +114,85 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
+[node name="GridContainer" type="GridContainer" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings"]
+margin_right = 440.0
+margin_bottom = 235.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label4" type="Label" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_top = 2.0
+margin_right = 218.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "AUDIO"
+
+[node name="Audio" type="CheckBox" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_left = 319.0
+margin_right = 343.0
+margin_bottom = 24.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_top = 28.0
+margin_right = 218.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "MASTER"
+
+[node name="Master" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_left = 222.0
+margin_top = 28.0
+margin_right = 440.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_top = 52.0
+margin_right = 218.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "MUSIC"
+
+[node name="Music" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_left = 222.0
+margin_top = 52.0
+margin_right = 440.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_top = 76.0
+margin_right = 218.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "SOUND EFFECTS"
+
+[node name="Sound Effects" type="HSlider" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings/GridContainer"]
+margin_left = 222.0
+margin_top = 76.0
+margin_right = 440.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+
 [node name="Restart" type="Button" parent="Content/Control/TextureRect/VBoxContainer/TabContainer/Settings"]
-margin_top = 120.0
-margin_right = 431.0
-margin_bottom = 160.0
-custom_fonts/font = SubResource( 2 )
+margin_top = 239.0
+margin_right = 440.0
+margin_bottom = 262.0
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RESTART"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Content/Control/TextureRect/VBoxContainer"]
 margin_top = 289.0
-margin_right = 473.0
+margin_right = 472.0
 margin_bottom = 312.0
 custom_constants/separation = 64
 alignment = 1
@@ -130,17 +201,17 @@ alignment = 1
 margin_right = 204.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RESUME"
 
 [node name="Retire" type="Button" parent="Content/Control/TextureRect/VBoxContainer/HBoxContainer"]
 margin_left = 268.0
-margin_right = 473.0
+margin_right = 472.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.843137, 0.72549, 0.45098, 1 )
 text = "RETIRE"
 [connection signal="visibility_changed" from="Content" to="." method="_on_Content_visibility_changed"]
