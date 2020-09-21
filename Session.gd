@@ -65,7 +65,14 @@ func _reset() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
 	Highscore = 0
 	Feathers = 0
+	
 	Upgrades.clear()
+	
+	Audio = true
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), 0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"), 0)
+	
 	_save()
 
 
