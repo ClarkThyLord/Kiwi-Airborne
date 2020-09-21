@@ -6,6 +6,7 @@
 [node name="Tree" type="StaticBody2D"]
 script = ExtResource( 1 )
 Type = 1
+Damage = 4.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

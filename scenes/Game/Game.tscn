@@ -14,18 +14,22 @@
 [ext_resource path="res://assets/menu/controls.png" type="Texture" id=12]
 [ext_resource path="res://assets/theme/panel/panel.png" type="Texture" id=13]
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.152941, 1, 0, 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=4]
 size = 42
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=6]
@@ -36,11 +40,7 @@ font_data = ExtResource( 6 )
 size = 32
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=9]
-size = 32
-font_data = ExtResource( 6 )
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/tighL/shinL/footL:position")
 tracks/0/interp = 1
@@ -258,7 +258,7 @@ tracks/17/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
 length = 2.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi/body/neck/head:position")
@@ -489,7 +489,7 @@ tracks/18/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "jump_gold"
 length = 4.0
 tracks/0/type = "value"
@@ -721,8 +721,7 @@ tracks/18/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "start"
+[sub_resource type="Animation" id=11]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Kiwi:position")
@@ -749,10 +748,10 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 1, 60 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 5, 60 )
 
 [node name="World" type="Node2D"]
@@ -815,6 +814,7 @@ __meta__ = {
 }
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -834,7 +834,7 @@ __meta__ = {
 margin_right = 158.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
-custom_styles/fg = SubResource( 12 )
+custom_styles/fg = SubResource( 1 )
 value = 50.0
 percent_visible = false
 
@@ -843,7 +843,7 @@ margin_top = 20.0
 margin_right = 158.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 0, 16 )
-custom_styles/fg = SubResource( 11 )
+custom_styles/fg = SubResource( 2 )
 value = 50.0
 percent_visible = false
 
@@ -851,7 +851,7 @@ percent_visible = false
 margin_top = 40.0
 margin_right = 158.0
 margin_bottom = 55.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "00000000000"
 icon = ExtResource( 7 )
 align = 0
@@ -860,7 +860,7 @@ align = 0
 margin_top = 59.0
 margin_right = 158.0
 margin_bottom = 128.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "FLIGHT : 0000000
 HIGHSCORE :
 000000000000
@@ -917,7 +917,7 @@ margin_right = 359.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "FLIGHT STATS"
 align = 1
 valign = 1
@@ -926,7 +926,7 @@ valign = 1
 margin_top = 31.0
 margin_right = 359.0
 margin_bottom = 51.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "!!! NEW HIGHSCORE !!!"
 align = 1
 
@@ -936,7 +936,7 @@ margin_right = 359.0
 margin_bottom = 204.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "FLIGHT: 00000
 FEATHERS: 00000"
 align = 1
@@ -953,7 +953,7 @@ alignment = 1
 margin_right = 163.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "PLAY"
 
 [node name="Upgrades" type="Button" parent="CanvasLayer/Summary/TextureRect/VBoxContainer/HBoxContainer"]
@@ -961,7 +961,7 @@ margin_left = 195.0
 margin_right = 359.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "UPGRADES"
 
 [node name="Background" type="Sprite" parent="."]
@@ -980,9 +980,9 @@ region_rect = Rect2( 0, 0, 124, 73 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WalkingStage"]
 autoplay = "idle"
 playback_speed = 1.5
-anims/idle = SubResource( 2 )
-anims/jump = SubResource( 3 )
-anims/jump_gold = SubResource( 13 )
+anims/idle = SubResource( 8 )
+anims/jump = SubResource( 9 )
+anims/jump_gold = SubResource( 10 )
 
 [node name="hill" type="Sprite" parent="WalkingStage"]
 position = Vector2( 0, 37 )
@@ -990,8 +990,7 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="Kiwi" parent="WalkingStage" instance=ExtResource( 9 )]
-position = Vector2( 85, 85 )
-rotation = 1.5708
+position = Vector2( 26.883, 31.999 )
 
 [node name="Gauge" type="Control" parent="WalkingStage"]
 anchor_right = 1.0
@@ -1010,7 +1009,7 @@ __meta__ = {
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FlyingStage"]
-anims/start = SubResource( 4 )
+anims/start = SubResource( 11 )
 
 [node name="Objects" type="Node2D" parent="FlyingStage"]
 
@@ -1026,11 +1025,11 @@ region_rect = Rect2( 0, 0, 124, 73 )
 
 [node name="Left" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 20, 36.5 )
-shape = SubResource( 5 )
+shape = SubResource( 12 )
 
 [node name="Right" type="CollisionShape2D" parent="FlyingStage/Walls"]
 position = Vector2( 104, 36.5 )
-shape = SubResource( 5 )
+shape = SubResource( 12 )
 
 [node name="Ends" type="StaticBody2D" parent="FlyingStage" groups=[
 "ends",
@@ -1039,7 +1038,7 @@ shape = SubResource( 5 )
 [node name="Top" type="CollisionShape2D" parent="FlyingStage/Ends"]
 position = Vector2( 62, -20 )
 rotation = 1.5708
-shape = SubResource( 10 )
+shape = SubResource( 13 )
 
 [node name="Barriers" type="StaticBody2D" parent="FlyingStage" groups=[
 "barriers",
@@ -1048,7 +1047,7 @@ shape = SubResource( 10 )
 [node name="Bottom" type="CollisionShape2D" parent="FlyingStage/Barriers"]
 position = Vector2( 62, 75 )
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 12 )
 
 [node name="Kiwi" parent="FlyingStage" instance=ExtResource( 1 )]
 position = Vector2( 62, 9 )

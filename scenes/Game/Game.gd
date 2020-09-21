@@ -4,7 +4,7 @@ extends Node2D
 
 # Imports
 const Rock := preload("res://objects/rock/Rock.tscn")
-const TreeClass := preload("res://objects/Tree/Tree.tscn")
+const TreeClass := preload("res://objects/tree/Tree.tscn")
 const Crystal := preload("res://objects/crystal/Crystal.tscn")
 
 const Feather := preload("res://objects/feather/Feather.tscn")

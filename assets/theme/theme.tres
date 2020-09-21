@@ -11,13 +11,13 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 26, 3 )
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 26, 3 )
 
@@ -58,19 +58,19 @@ region_rect = Rect2( 0, 0, 12, 9 )
 margin_left = 2.31322
 margin_right = 1.92768
 
-[sub_resource type="StyleBoxEmpty" id=19]
+[sub_resource type="StyleBoxEmpty" id=16]
 content_margin_left = 16.0
 content_margin_right = 16.0
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=20]
 
 [sub_resource type="StyleBoxEmpty" id=21]
-
-[sub_resource type="StyleBoxEmpty" id=22]
-
-[sub_resource type="StyleBoxEmpty" id=23]
-
-[sub_resource type="StyleBoxEmpty" id=24]
 
 [resource]
 default_font = SubResource( 10 )
@@ -81,10 +81,10 @@ Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = SubResource( 1 )
-Button/styles/focus = SubResource( 3 )
-Button/styles/hover = SubResource( 3 )
-Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = SubResource( 2 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -133,21 +133,21 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 19 )
-TabContainer/styles/tab_bg = SubResource( 19 )
-TabContainer/styles/tab_disabled = SubResource( 19 )
-TabContainer/styles/tab_fg = SubResource( 19 )
+TabContainer/styles/panel = SubResource( 16 )
+TabContainer/styles/tab_bg = SubResource( 16 )
+TabContainer/styles/tab_disabled = SubResource( 16 )
+TabContainer/styles/tab_fg = SubResource( 16 )
 ToolButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.9, 0.95, 1, 0.3 )
 ToolButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 ToolButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 ToolButton/constants/hseparation = 3
 ToolButton/fonts/font = null
-ToolButton/styles/disabled = SubResource( 20 )
-ToolButton/styles/focus = SubResource( 21 )
-ToolButton/styles/hover = SubResource( 22 )
-ToolButton/styles/normal = SubResource( 23 )
-ToolButton/styles/pressed = SubResource( 24 )
+ToolButton/styles/disabled = SubResource( 17 )
+ToolButton/styles/focus = SubResource( 18 )
+ToolButton/styles/hover = SubResource( 19 )
+ToolButton/styles/normal = SubResource( 20 )
+ToolButton/styles/pressed = SubResource( 21 )
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
