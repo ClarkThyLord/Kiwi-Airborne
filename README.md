@@ -22,7 +22,7 @@
 ---
 
 # About
-Kiwi: Airborne, is a 2D side-scroller, made with [Godot](https://github.com/godotengine/godot), in which you help a Kiwi fulfill its dream of flight, all while attempting to overcome the various obstacles in its way; made for the 2020 Open Jam in a weekend, inspired by the short film [Kiwi!](https://www.youtube.com/watch?v=sdUUx5FdySs)
+Kiwi: Airborne, is a 2D side-scroller, made with [Godot](https://github.com/godotengine/godot), in which you help a Kiwi fulfill its dream of flight, all while attempting to overcome the various obstacles in its way; placed 3rd in the [2020 Open Jam](https://openjam.io/posts/recap-2020/), the weekend-long open-source game jam, inspired by the short film [Kiwi!](https://www.youtube.com/watch?v=sdUUx5FdySs)
 
 ## [Open Jam 2020, Theme: Airborne](https://itch.io/jam/open-jam-2020)
 Open Jam is a game jam with 🖤.  At Open Jam, you build an open-source video game over the weekend, rate other creators’ games, and compete for delicious open source karma.   Open Jam is a game jam that promotes open source games and game creation tools. 
