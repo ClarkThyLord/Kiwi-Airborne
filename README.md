@@ -12,6 +12,9 @@
 	<a href="https://github.com/ClarkThyLord/Kiwi-Airborne/releases">
 		<img src="https://img.shields.io/badge/Version-1.0.0-green.svg" alt="Version">
 	</a>
+	<a href="https://openjam.io/posts/recap-2020/">
+		<img src="https://img.shields.io/badge/OpenJam-3rd-blueviolet.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAYCAYAAADKx8xXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwABSrEAAUqxAS9NDFcAAAEmSURBVDhPYxhcwDUq5b+5u/9/KBcFMEJpFJBQ2w1WfP3UETD/5M6NGOpQBGAavnx8D+avmdSG1WAQgEuAnCUiq/D19/dv3Pg0wAATlGb49PY1A7GaQACu6MiFf69fvYNykMDjlxDaWJOBwcaASRTCQ7IRF5AVhzLQANzGdfv+vQ5wYGDAZisI3HmCaiNc479//16DaFwaQUBChASn4gIsUJphT9YpkY/3vzDYLnV6AxUCg2UWa0SgTBQAd+qujBP/QRo/PvgCFUEF9398Ymh9GAdXj+JUXJo+/f0FZSEAUX58+/sHlIUABDVisw0E4Bof7X8BZREH8NqIyzYQgGtEVgRiw/jY/AcCKDaia8ClCQTg8bJ2/78IWE7ABQoimFZAmXQHDAwAwoJ7MRZ3e1wAAAAASUVORK5CYII=" alt="AssetLibrary">
+	</a>
 	<a href="https://github.com/ClarkThyLord/Kiwi-Airborne/blob/master/LICENSE">
 		<img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License">
 	</a>
